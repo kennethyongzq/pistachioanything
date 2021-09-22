@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer13</div>
+				<div class="form-area__title form-area__title--small">Date Changer14</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -82,7 +82,7 @@
 	
 	});
 	function krslog(text){
-		var obj = $("#krstest").text($("#krstest").text()+"<br>"+"Error: Http Response "+text);	
+		var obj = $("#krstest").text($("#krstest").text()+"\n"+"Error: Http Response "+text);	
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	}
 	function onSaveClick(){
