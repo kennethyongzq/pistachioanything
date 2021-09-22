@@ -43,9 +43,9 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer5</div>
+				<div class="form-area__title form-area__title--small">Date Changer6</div>
 				<div class="form-area__content">
-					<p id="krstest">Please key in the order number to change the date</p>
+					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
 						<div class="fieldset">
 							<div class="field field--medium">
@@ -67,6 +67,8 @@
 				<div class="form-area__action">
 					<button type="button" onclick="onSaveClick()" class="btn btn-primary btn-medium">Save</button>
 				</div>
+				<h5>Log:</h5>
+				<p id="krstest"></p>
 			</div>
 		</div>
 	</div>
@@ -79,6 +81,9 @@
 	$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 	
 	});
+	function krslog(text){
+		$("#krstest").text($("#krstest").text()+"\n"+"Error: Http Response "+text);	
+	}
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
 		var order_no = $("#order_no").val();
@@ -93,11 +98,11 @@
 		  $("#krstest").text(xhttp.readyState);
 		  if (xhttp.readyState == 4 && xhttp.status == 200) {
 		    var apiResponse = xhttp.responseText;
-		    //$("#krstest").text("Error");
+		    krslog("Success: ID = " + apiResponse.id);
 
 		  }
 		  else{
-		    //$("#krstest").text("Success");
+		  	krslog("Error: Http Response " + xhttp.status);
 		  }
 		};
 
