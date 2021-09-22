@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer19</div>
+				<div class="form-area__title form-area__title--small">Date Changer20 show pickuptime</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -128,6 +128,7 @@
 		    var apiResponse = xhttp.responseText;
 		    var my_order = JSON.parse(apiResponse);
 		    krslog("Success: ID = " + my_order.id);
+		    krslog("Success: ID = " + my_order.pickupTime);
 
 		  }
 		};
