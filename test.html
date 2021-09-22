@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer33 put try2</div>
+				<div class="form-area__title form-area__title--small">Date Changer34 put try2</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -147,6 +147,7 @@
 								 
 						krslog("PUT:requestURL:" + requestURL);
 						xhttp2.open("PUT", requestURL, true);
+		   			        xhttp2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			    			var to_send = {'extraFields':{'ecwid_order_delivery_time_interval_end':updated_time_end,
 									     'ecwid_order_delivery_time_interval_start':updated_time_start}};
 			    			var stringified_to_send = JSON.stringify(to_send)
