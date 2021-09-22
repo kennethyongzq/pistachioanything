@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer23 checking for delivery</div>
+				<div class="form-area__title form-area__title--small">Date Changer24 set hours and minutes/div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -125,16 +125,24 @@
 		  if (xhttp.readyState == 4 && xhttp.status == 200) {
 		    var apiResponse = xhttp.responseText;
 		    var my_order = JSON.parse(apiResponse);
-		    krslog("Success: ID = " + my_order.id);
+		    krslog("Success: Obtained data for ID = " + my_order.id);
 
 		    var time_end = my_order.extraFields.ecwid_order_delivery_time_interval_end;	
 		    var time_format = my_order.extraFields.ecwid_order_delivery_time_display_format;
 		    var time_start = my_order.extraFields.ecwid_order_delivery_time_interval_start;
-		    krslog("Success: Time End = " + time_end);
-		    krslog("Success: Time Format = " + time_format);
-		    krslog("Success: Time Start = " + time_start);
+
 	            if (time_end !== undefined && time_start !== undefined){
-		      // Success, do update
+		      var updated_time_start = jsDate
+		      var updated_time_end = jsDate
+		      updated_time_start.setHours(0)
+		      updated_time_end.setHours(23)
+		      updated_time_start.setMinutes(0)
+		      updated_time_end.setMinutes(59)
+  		      krslog("Original: Time End = " + time_end);
+		      krslog("Original: Time Start = " + time_start);
+  		      krslog("Update: Time End = " + updated_time_end);
+		      krslog("Update: Time Start = " + updated_time_start);
+			    
 		    }
 		    else{
 		      krslog("Order is not a delivery");
