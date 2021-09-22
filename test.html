@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer38 corect some errors</div>
+				<div class="form-area__title form-area__title--small">Date Changer39</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -138,8 +138,8 @@
 
 		      //var updated_time_start = new Date(jsDate.getFullYear(), jsDate.getMonth(), jsDate.getDate(), 00, 0, 0, 0);
 		      //var updated_time_end = new Date(jsDate.getFullYear(), jsDate.getMonth(), jsDate.getDate(), 23, 59, 0, 0);
-		      var updated_time_start = yst.getFullYear() + "-" + String(yst.getMonth()).padStart(2, '0') + "-" + String(yst.getDate()).padStart(2, '0') + " 16:00:00 +0000"
-		      var updated_time_end = jsDate.getFullYear() + "-" + String(jsDate.getMonth()).padStart(2, '0') + "-" + String(jsDate.getDate()).padStart(2, '0') + " 15:59:59 +0000"
+		      var updated_time_start = yst.getFullYear() + "-" + String(yst.getMonth()+1).padStart(2, '0') + "-" + String(yst.getDate()).padStart(2, '0') + " 16:00:00 +0000"
+		      var updated_time_end = jsDate.getFullYear() + "-" + String(jsDate.getMonth()+1).padStart(2, '0') + "-" + String(jsDate.getDate()).padStart(2, '0') + " 15:59:59 +0000"
 
   		      krslog("Original: Time End = " + time_end);
 		      krslog("Original: Time Start = " + time_start);
