@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer2</div>
+				<div class="form-area__title form-area__title--small">Date Changer3</div>
 				<div class="form-area__content">
 					<p id="krstest">Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -77,13 +77,30 @@
 <script>
 	$(document).ready(function(){
 	$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
-	$("#krstest").text(accessToken);
+	
 	});
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
-		//$.get( "ajax/test.html", function( data ) {
-		//  $("#krstest").text();
-		//});
+		var order_no = $("#order_no").val();
+		var xhttp = new XMLHttpRequest();
+
+		var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/orders/"+order_no+"?token="+accessToken
+
+		xhttp.open("GET", requestURL, true);
+		xhttp.send();
+
+		xhttp.onreadystatechange = function() {
+		  if (xhttp.readyState == 4 && xhttp.status == 200) {
+		    var apiResponse = xhttp.responseText;
+		    $("#krstest").text("Success");
+
+		  }
+		  else{
+		    $("#krstest").text("Error");
+		  }
+		};
+
+
 	}
 	
 	
