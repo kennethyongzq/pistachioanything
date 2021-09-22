@@ -88,6 +88,22 @@
 		//$("#krstest").text($("#order_no").val());	
 		var order_no = $("#order_no").val();
 		krslog("Getting Order No " + order_no);
+		var jsDate = $('#your_datepicker_id').datepicker('getDate');
+		if (jsDate !== null) { // if any date selected in datepicker
+		    if (jsDate instanceof Date){// -> true
+		        var order_date = jsDate.getDate();
+		        jsDate.getMonth();
+		        jsDate.getFullYear();
+		        krslog("Updating with Date = " + order_date);	 
+		    }
+		    else{
+		        krslog("Error:jsDate is not Date Instance");	    
+		    }
+		}
+		else{
+    		    krslog("Error:Date is null");
+		}
+		
 		var xhttp = new XMLHttpRequest();
 
 		var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/orders/"+order_no+"?token="+accessToken
