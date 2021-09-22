@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer6</div>
+				<div class="form-area__title form-area__title--small">Date Changer8</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -82,20 +82,23 @@
 	
 	});
 	function krslog(text){
-		$("#krstest").text($("#krstest").text()+"\n"+"Error: Http Response "+text);	
+		$("#krstest").text($("#krstest").text()+"<br>"+"Error: Http Response "+text);	
 	}
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
 		var order_no = $("#order_no").val();
+		krslog("Getting Order No " + order_no);
 		var xhttp = new XMLHttpRequest();
 
 		var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/orders/"+order_no+"?token="+accessToken
-
+		krslog("requestURL:" + requestURL);
 		xhttp.open("GET", requestURL, true);
 		xhttp.send();
 
 		xhttp.onreadystatechange = function() {
-		  $("#krstest").text(xhttp.readyState);
+		  
+		  krslog("xhttp.onreadystatechange:xhttp.readyState = " + xhttp.readyState);
+		  krslog("xhttp.onreadystatechange:xhttp.status = " + xhttp.status);
 		  if (xhttp.readyState == 4 && xhttp.status == 200) {
 		    var apiResponse = xhttp.responseText;
 		    krslog("Success: ID = " + apiResponse.id);
