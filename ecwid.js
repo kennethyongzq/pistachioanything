@@ -1,3 +1,4 @@
+/*
 // Initialize extra fields
 ec = ec || {};
 ec.order = ec.order || {};
@@ -14,3 +15,4 @@ ec.order.extraFields.additional_remarks = {
 };
 
 Ecwid.refreshConfig();
+*./
