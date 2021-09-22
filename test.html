@@ -77,9 +77,13 @@
 <script>
 	$(document).ready(function(){
 	$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
+	$("#krstest").text(accessToken);
 	});
 	function onSaveClick(){
-		$("#krstest").text($("#order_no").val());	
+		//$("#krstest").text($("#order_no").val());	
+		//$.get( "ajax/test.html", function( data ) {
+		//  $("#krstest").text();
+		//});
 	}
 	
 	
