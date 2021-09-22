@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer11</div>
+				<div class="form-area__title form-area__title--small">Date Changer13</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -89,7 +89,7 @@
 		//$("#krstest").text($("#order_no").val());	
 		var order_no = $("#order_no").val();
 		krslog("Getting Order No " + order_no);
-		var jsDate = $('#your_datepicker_id').datepicker('getDate');
+		var jsDate = $('#order_date').datepicker('getDate');
 		if (jsDate !== null) { // if any date selected in datepicker
 		    if (jsDate instanceof Date){// -> true
 		        var order_date = jsDate.getDate();
@@ -114,15 +114,12 @@
 
 		xhttp.onreadystatechange = function() {
 		  
-		  krslog("xhttp.onreadystatechange:xhttp.readyState = " + xhttp.readyState);
-		  krslog("xhttp.onreadystatechange:xhttp.status = " + xhttp.status);
+		  krslog("xhttp.readyState = " + xhttp.readyState);
+		  krslog("xhttp.status = " + xhttp.status);
 		  if (xhttp.readyState == 4 && xhttp.status == 200) {
 		    var apiResponse = xhttp.responseText;
 		    krslog("Success: ID = " + apiResponse.orderid);
 
-		  }
-		  else{
-		  	krslog("Error: Http Response " + xhttp.status);
 		  }
 		};
 
