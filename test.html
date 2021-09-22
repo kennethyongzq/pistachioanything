@@ -82,7 +82,7 @@
 	
 	});
 	function krslog(text){
-		var obj = $("#krstest").text($("#krstest").text()+"\n"+"Error: Http Response "+text);	
+		var obj = $("#krstest").text($("#krstest").text()+"\n"+text);	
 		obj.html(obj.html().replace(/\n/g,'<br/>'));
 	}
 	function onSaveClick(){
