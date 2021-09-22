@@ -78,6 +78,9 @@
 	$(document).ready(function(){
 	$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 	});
+	function onSaveClick(){
+		$("#krstest").text($("#order_no").val());	
+	}
 	
 	
 
