@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date Changer22 checking for delivery</div>
+				<div class="form-area__title form-area__title--small">Date Changer23 checking for delivery</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the date</p>
 					<div class="fieldsets-batch">
@@ -132,7 +132,14 @@
 		    var time_start = my_order.extraFields.ecwid_order_delivery_time_interval_start;
 		    krslog("Success: Time End = " + time_end);
 		    krslog("Success: Time Format = " + time_format);
-		    krslog("Success: Time Start = " + time_start);			
+		    krslog("Success: Time Start = " + time_start);
+	            if (time_end !== undefined && time_start !== undefined){
+		      // Success, do update
+		    }
+		    else{
+		      krslog("Order is not a delivery");
+		      return;
+		    }
 		  }
 		};
 
