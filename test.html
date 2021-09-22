@@ -149,7 +149,9 @@
 						xhttp2.open("PUT", requestURL, true);
 			    			var to_send = {'extraFields':{'ecwid_order_delivery_time_interval_end':updated_time_end,
 									     'ecwid_order_delivery_time_interval_start':updated_time_start}};
-						xhttp2.send(JSON.stringify(to_send));
+			    			var stringified_to_send = JSON.stringify(to_send)
+						krslog(stringified_to_send);
+						xhttp2.send(stringified_to_send);
 
 						xhttp2.onreadystatechange = function() {
 
