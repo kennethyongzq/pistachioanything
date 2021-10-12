@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date changer11: remove date and also show json string (hopefully)</div>
+				<h4>Date changer12: full function plus push to storage<h4>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -67,7 +67,7 @@
 				<div class="form-area__action">
 					<button type="button" onclick="onSaveClick()" class="btn btn-primary btn-medium">Save</button>
 				</div>
-				<div class="form-area__title form-area__title--small">Blockout Dates</div>
+				<h4>Blockout Dates</h4>
 				<div class="form-area__content">
 					<p>Please Enter Dates to blockout</p>
 					<table id="blockout-table">
@@ -106,10 +106,7 @@
 	$(document).ready(function(){
 		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
-		//EcwidApp.setAppPublicConfig("Helloworld", function(){
-		//	krslog("setAppPublicConfig Success");
-		//});
-
+		
 		EcwidApp.getAppPublicConfig(function(publicData) {
 			krslog(publicData);
 		});
@@ -125,6 +122,7 @@
 		$button.click(function(){
 			krslog("Delete Button Clicked");	
 			$(this).parent().pareant().remove();
+			pushToStorage();
 		});
 		if (val){
 			var $tr = $('<tr>').append(
@@ -151,7 +149,10 @@
 		var list_of_dates_to_json_str = JSON.stringify(list_of_dates)
 		
 		krslog(list_of_dates_to_json_str);
-		
+		EcwidApp.setAppPublicConfig(list_of_dates_to_json_str, function(){
+			krslog("pushToStorage Success");
+		});
+
 		krslosg("pushToStorage end");
 	}
 	function onSaveClick(){
