@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date changer5:add rows to table</div>
+				<div class="form-area__title form-area__title--small">Date changer6:found the problem with retrieving data</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -105,10 +105,10 @@
 	$(document).ready(function(){
 		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
-			EcwidApp.setAppPublicConfig("Helloworld", function(){
-			krslog("setAppPublicConfig Success");
-		});
-		var test_get = Ecwid.getAppPublicConfig('custom-app-33883008-3'); 
+		//EcwidApp.setAppPublicConfig("Helloworld", function(){
+		//	krslog("setAppPublicConfig Success");
+		//});
+		var test_get = EcwidApp.getAppPublicConfig('custom-app-33883008-3'); 
 		krslog(test_get);
 	});
 	function krslog(text){
