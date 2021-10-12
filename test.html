@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date changer4</div>
+				<div class="form-area__title form-area__title--small">Date changer5:add rows to table</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -114,8 +114,18 @@
 	function krslog(text){
 	        $("#krstest").append("<br />" + text);
 	}
+	function addBlockoutDate(){
+		var val = $("#blockout_date").val();
+		if (val){
+			var $tr = $('<tr>').append(
+				$('<td>').text(val),
+				$('<td>').text(""));
+			$tr.appendTo('#blockout-table');
+		}
+	}
 	function onAddClick(){
 		krslog("onAddClick");	
+		addBlockoutDate();
 	}
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
