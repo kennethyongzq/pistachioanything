@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date changer6:found the problem with retrieving data</div>
+				<div class="form-area__title form-area__title--small">Date changer7:produce a json string</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -118,7 +118,7 @@
 		var val = $("#blockout_date").val();
 		if (val){
 			var $tr = $('<tr>').append(
-				$('<td>').text(val),
+				$('<td class="blockoutdate">').text(val),
 				$('<td>').text(""));
 			$tr.appendTo('#blockout-table');
 		}
@@ -126,6 +126,13 @@
 	function onAddClick(){
 		krslog("onAddClick");	
 		addBlockoutDate();
+		var list_of_dates = [];
+		$('.blockoutdate').each(function(i, obj) {
+		    list_of_dates.append($(this).text());
+		});
+		var list_of_dates_to_json_str = JSON.stringify(list_of_dates)
+		krslog(list_of_dates_to_json_str);
+	
 	}
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
