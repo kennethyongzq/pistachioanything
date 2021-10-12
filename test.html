@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date changer8: do not need app string</div>
+				<div class="form-area__title form-area__title--small">Date changer9: delete button will print delete pompt</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -116,23 +116,32 @@
 	}
 	function addBlockoutDate(){
 		var val = $("#blockout_date").val();
+		$button = $('<button>');
+		$button.addClass('btn btn-default btn--destructive');
+		$button.text("Delete");
+		$button.click(function(){
+			krslog("Delete Button Clicked");	
+		});
 		if (val){
 			var $tr = $('<tr>').append(
 				$('<td class="blockoutdate">').text(val),
-				$('<td>').text(""));
+				$('<td>').append($button));
 			$tr.appendTo('#blockout-table');
 		}
 	}
 	function onAddClick(){
 		krslog("onAddClick");	
 		addBlockoutDate();
+		pushToStorage();
+	
+	}
+	function pushToStorage(){
 		var list_of_dates = [];
 		$('.blockoutdate').each(function(i, obj) {
 		    list_of_dates.append($(this).text());
 		});
 		var list_of_dates_to_json_str = JSON.stringify(list_of_dates)
 		krslog(list_of_dates_to_json_str);
-	
 	}
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
