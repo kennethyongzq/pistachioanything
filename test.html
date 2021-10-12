@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h4>POOT Date changer19: Date Picker</h4>
+				<h4>POOT Date changer20: Storage Retrieval</h4>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -110,34 +110,44 @@
 		
 		EcwidApp.getAppPublicConfig(function(publicData) {
 			krslog(publicData);
+			loadBlockoutDates();
 		});
 	});
+	function loadBlockoutDates(data){
+		var parsed_data = JSON.parse(data);
+		for (var i = 0; i < parsed_data.length; i++) { 
+			var date = new Date();
+			date.setTime(parsed_data[i]);
+			addBlockoutDate(date);
+		}
+	}
 	function krslog(text){
 	        $("#krstest").append("<br />" + text);
 	}
-	function addBlockoutDate(){
+	function addBlockoutDate(date){
 		
-		var val = $("#blockout_date").datepicker('getDate');
-		var epoch = val.getTime();
-		$button = $('<button>');
-		$button.addClass('btn btn-default btn--destructive');
-		$button.text("Delete");
-		$button.click(function(){
-			krslog("Delete Button Clicked");	
-			$(this).parent().parent().remove();
-			pushToStorage();
-		});
-		if (val){
+		if (date){
+			var epoch = date.getTime();
+			$button = $('<button>');
+			$button.addClass('btn btn-default btn--destructive');
+			$button.text("Delete");
+			$button.click(function(){
+				krslog("Delete Button Clicked");	
+				$(this).parent().parent().remove();
+				pushToStorage();
+			});
+
 			var $tr = $('<tr>').append(
-				$('<td>').text(val),
+				$('<td>').text(date),
 				$('<td class="blockoutdate">').text(epoch),
 				$('<td>').append($button));
 			$tr.appendTo('#blockout-table');
 		}
 	}
 	function onAddClick(){
-		krslog("onAddClick");	
-		addBlockoutDate();
+		krslog("onAddClick");
+		var val = $("#blockout_date").datepicker('getDate');
+		addBlockoutDate(val);
 		pushToStorage();
 	
 	}
