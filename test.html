@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date changer3</div>
+				<div class="form-area__title form-area__title--small">Date changer4</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -76,6 +76,21 @@
 						<th></th>
 						</tr>
 					</table>
+					<div class="fieldsets-batch">
+						<div class="fieldset">
+							<div class="field field--medium">
+								<label class="field__label">Date</label>
+								<input id="blockout_date" type="text" class="field__input" tabindex="4" maxlength="64">
+								<div class="field__placeholder">Date</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="form-area__action">
+					<button type="button" onclick="onAddClick()" class="btn btn-primary btn-medium">Add</button>
+				</div>
+				
 				</div>
 				<h5>Log:</h5>
 				<p id="krstest"></p>
@@ -89,6 +104,7 @@
 <script>
 	$(document).ready(function(){
 		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
+		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
 			EcwidApp.setAppPublicConfig("Helloworld", function(){
 			krslog("setAppPublicConfig Success");
 		});
@@ -97,6 +113,9 @@
 	});
 	function krslog(text){
 	        $("#krstest").append("<br />" + text);
+	}
+	function onAddClick(){
+		krslog("onAddClick");	
 	}
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
