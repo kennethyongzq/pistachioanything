@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h4>POOT Date changer21: toLocaleDateString</h4>
+				<h4>POOT Date changer22: Forgot to load public data</h4>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -110,7 +110,7 @@
 		
 		EcwidApp.getAppPublicConfig(function(publicData) {
 			krslog(publicData);
-			loadBlockoutDates();
+			loadBlockoutDates(publicData);
 		});
 	});
 	function loadBlockoutDates(data){
