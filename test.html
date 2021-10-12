@@ -78,8 +78,10 @@
   <script src="https://d35z3p2poghz10.cloudfront.net/ecwid-sdk/css/1.3.13/ecwid-app-ui.min.js"></script>
 <script>
 	$(document).ready(function(){
-	$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
-	
+		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
+		EcwidApp.setAppPublicConfig("Helloworld", function(){
+			krslog("setAppPublicConfig Success");
+		});
 	});
 	function krslog(text){
 	        $("#krstest").append("<br />" + text);
