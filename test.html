@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h4>Date changer12: full function plus push to storage<h4>
+				<h4>Date changer13: full function plus push to storage + delete button working<h4>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -121,7 +121,7 @@
 		$button.text("Delete");
 		$button.click(function(){
 			krslog("Delete Button Clicked");	
-			$(this).parent().pareant().remove();
+			$(this).parent().parent().remove();
 			pushToStorage();
 		});
 		if (val){
