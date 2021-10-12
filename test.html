@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h4>POOT Date changer20: Storage Retrieval</h4>
+				<h4>POOT Date changer21: toLocaleDateString</h4>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -138,7 +138,7 @@
 			});
 
 			var $tr = $('<tr>').append(
-				$('<td>').text(date),
+				$('<td>').text(date.toLocaleDateString()),
 				$('<td class="blockoutdate">').text(epoch),
 				$('<td>').append($button));
 			$tr.appendTo('#blockout-table');
