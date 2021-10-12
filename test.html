@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h4>Date changer15: krslog error</h4>
+				<h4>Date changer16: push to storage test</h4>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -144,9 +144,11 @@
 			
 			krslog("pushToStorage appending a date");		
 		    list_of_dates.append($(this).text());
+					krslog("successfull appending a date");
 		});
 		
-		var list_of_dates_to_json_str = JSON.stringify(list_of_dates)
+		krslog("completed each");
+		var list_of_dates_to_json_str = JSON.stringify(list_of_dates);
 		
 		krslog(list_of_dates_to_json_str);
 		EcwidApp.setAppPublicConfig(list_of_dates_to_json_str, function(){
