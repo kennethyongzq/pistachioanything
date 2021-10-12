@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<div class="form-area__title form-area__title--small">Date changer10: using correct public data retriever</div>
+				<div class="form-area__title form-area__title--small">Date changer11: remove date and also show json string (hopefully)</div>
 				<div class="form-area__content">
 					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
 					<div class="fieldsets-batch">
@@ -72,7 +72,7 @@
 					<p>Please Enter Dates to blockout</p>
 					<table id="blockout-table">
 						<tr>
-						<th>Date</th>
+						<th>Blockout Date </th>
 						<th></th>
 						</tr>
 					</table>
@@ -124,6 +124,7 @@
 		$button.text("Delete");
 		$button.click(function(){
 			krslog("Delete Button Clicked");	
+			$(this).parent().pareant().remove();
 		});
 		if (val){
 			var $tr = $('<tr>').append(
@@ -139,12 +140,19 @@
 	
 	}
 	function pushToStorage(){
+		krslosg("pushToStorage start");
 		var list_of_dates = [];
-		$('.blockoutdate').each(function(i, obj) {
+		$('.blockoutdate').each(function() {
+			
+			krslosg("pushToStorage appending a date");		
 		    list_of_dates.append($(this).text());
 		});
+		
 		var list_of_dates_to_json_str = JSON.stringify(list_of_dates)
+		
 		krslog(list_of_dates_to_json_str);
+		
+		krslosg("pushToStorage end");
 	}
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
