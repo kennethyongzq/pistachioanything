@@ -43,9 +43,10 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h4>POOT Date changer22: Forgot to load public data</h4>
+				<h1>Additional Settings</h1>
+				<h3>Delivery Date Settings</h3>
 				<div class="form-area__content">
-					<p>Please key in the order number to change the delivery date, do not use for self pickup orders</p>
+					<p>Updates an order's delivery date given order number</p>
 					<div class="fieldsets-batch">
 						<div class="fieldset">
 							<div class="field field--medium">
@@ -67,9 +68,10 @@
 				<div class="form-area__action">
 					<button type="button" onclick="onSaveClick()" class="btn btn-primary btn-medium">Save</button>
 				</div>
-				<h4>Blockout Dates</h4>
+				<h3>Blockout Date Settings</h3>
+
 				<div class="form-area__content">
-					<p>Please Enter Dates to blockout</p>
+					<p>Blocks out dates from storefront (Work in Progress)</p>
 					<table id="blockout-table">
 						<tr>
 						<th>Blockout Date </th>
@@ -128,7 +130,7 @@
 		
 		if (date){
 			var epoch = date.getTime();
-			$button = $('<button>');
+			$button = $('<button style="margin-left:30px;">');
 			$button.addClass('btn btn-default btn--destructive');
 			$button.text("Delete");
 			$button.click(function(){
