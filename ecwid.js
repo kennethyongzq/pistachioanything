@@ -1,5 +1,5 @@
 Ecwid.OnAPILoaded.add(function() {
-    console.log("Version 12 : night time try");
+    console.log("Version 12 : night time try2");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -50,7 +50,8 @@ Ecwid.OnAPILoaded.add(function() {
     }
     */
     
-
+    console.log("extraFields after change");
+    console.log(ec.order.extraFields);
 
 
     //Ecwid.refreshConfig();
