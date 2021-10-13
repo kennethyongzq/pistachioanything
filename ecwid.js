@@ -1,4 +1,4 @@
-console.log("Version 8 : orderDetailsDisplaySection");
+console.log("Version 9 : ecwid_order_pickup_time");
 var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
 console.log(data);
 data = JSON.parse(data)
@@ -34,11 +34,11 @@ for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_star
     console.log(prev_options);
     ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions.beforeShowDay = my_check;
 }
-for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
-    var prev_options = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions;    
+for (let i = 0; i < ec.order.extraFields.ecwid_order_pickup_time.overrides.length; i++) {
+    var prev_options = ec.order.extraFields.ecwid_order_pickup_time.overrides[i].fieldsToOverride.datePickerOptions;    
     console.log("prev_options");
     console.log(prev_options);
-    ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions.beforeShowDay = my_check;
+    ec.order.extraFields.ecwid_order_pickup_time.overrides[i].fieldsToOverride.datePickerOptions.beforeShowDay = my_check;
 }
 
 
