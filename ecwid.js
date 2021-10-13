@@ -15,5 +15,5 @@ ec.order.extraFields.additional_remarks = {
 };
 
 Ecwid.refreshConfig();
-*./
+*/
 console.log("Helloworld Chris");
