@@ -111,6 +111,7 @@
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
 		
 		EcwidApp.getAppPublicConfig(function(publicData) {
+			krslog("EcwidApp.getAppPublicConfig Success");
 			krslog(publicData);
 			loadBlockoutDates(publicData);
 		});
@@ -134,7 +135,6 @@
 			$button.addClass('btn btn-default btn--destructive');
 			$button.text("Delete");
 			$button.click(function(){
-				krslog("Delete Button Clicked");	
 				$(this).parent().parent().remove();
 				pushToStorage();
 			});
@@ -147,31 +147,25 @@
 		}
 	}
 	function onAddClick(){
-		krslog("onAddClick");
 		var val = $("#blockout_date").datepicker('getDate');
 		addBlockoutDate(val);
 		pushToStorage();
 	
 	}
 	function pushToStorage(){
-		krslog("pushToStorage start");
+
 		var list_of_dates = [];
-		$('.blockoutdate').each(function() {
-			
-			krslog("pushToStorage appending a date");		
+		$('.blockoutdate').each(function() {		
 		    list_of_dates.push($(this).text());
-					krslog("successfull appending a date");
 		});
-		
-		krslog("completed each");
 		var list_of_dates_to_json_str = JSON.stringify(list_of_dates);
 		
-		krslog(list_of_dates_to_json_str);
+
 		EcwidApp.setAppPublicConfig(list_of_dates_to_json_str, function(){
-			krslog("pushToStorage Success");
+			krslog("EcwidApp.setAppPublicConfig Success");
+			krslog(list_of_dates_to_json_str);
 		});
 
-		krslosg("pushToStorage end");
 	}
 	function onSaveClick(){
 		//$("#krstest").text($("#order_no").val());	
