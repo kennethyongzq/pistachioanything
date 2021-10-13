@@ -1,4 +1,4 @@
-console.log("Version 9 : remove {}");
+console.log("Version 10 : orderDetailsDisplaySection");
 var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
 console.log(data);
 data = JSON.parse(data)
@@ -12,8 +12,10 @@ ec.order.extraFields = ec.order.extraFields || {};
 
 console.log("extraFields");
 console.log(ec.order.extraFields);
+
+ec.order.extraFields.ecwid_order_delivery_time_interval_start = ec.order.extraFields.ecwid_order_delivery_time_interval_start || {};
 console.log("orderDetailsDisplaySection");
-console.log(ec.order.extraFields['ecwid_order_delivery_time_interval_start']['orderDetailsDisplaySection']);
+console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.orderDetailsDisplaySection);
 
 function custom_app_33883008_3_my_check(in_date) {
     for (let j = 0; j < data.length; j++) {
