@@ -1,4 +1,4 @@
-console.log("Version 1");
+console.log("Version 2");
 var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
 console.log(data);
 
@@ -8,8 +8,8 @@ ec.order.extraFields = ec.order.extraFields || {};
 
 console.log("extraFields");
 console.log(ec.order.extraFields);
-for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
-  var prev_options = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions 
+for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start['overrides'].length; i++) {
+  var prev_options = ec.order.extraFields.ecwid_order_delivery_time_interval_start['overrides'][i].fieldsToOverride.datePickerOptions 
 }
 console.log("prev_options");
 console.log(prev_options);
