@@ -1,7 +1,7 @@
 console.log("Version 6 : {}");
 var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
 console.log(data);
-data = data.toJSON();
+data = JSON.parse(data)
 console.log(data);
 
 ec = ec || {};
