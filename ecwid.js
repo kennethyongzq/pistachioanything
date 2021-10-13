@@ -1,5 +1,5 @@
 Ecwid.OnAPILoaded.add(function() {
-    console.log("Version 11 : OnAPILoaded");
+    console.log("Version 12 : Stop the madness");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -30,6 +30,7 @@ Ecwid.OnAPILoaded.add(function() {
         }
         return [true, "", ""];
     }
+    /*
     for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
         var prev_options = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions;    
         console.log("prev_options");
@@ -42,6 +43,7 @@ Ecwid.OnAPILoaded.add(function() {
         console.log(prev_options);
         ec.order.extraFields.ecwid_order_pickup_time.overrides[i].fieldsToOverride.datePickerOptions.beforeShowDay = my_check;
     }
+    */
 
 
 
