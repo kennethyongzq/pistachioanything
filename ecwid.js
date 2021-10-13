@@ -30,5 +30,5 @@ for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_star
 }
 
 
-Ecwid.refreshConfig();
+//Ecwid.refreshConfig();
 
