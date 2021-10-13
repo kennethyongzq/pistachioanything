@@ -1,4 +1,4 @@
-console.log("Version 9 : ecwid_order_pickup_time");
+console.log("Version 9 : put it in a strring thingy");
 var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
 console.log(data);
 data = JSON.parse(data)
@@ -14,9 +14,9 @@ ec.order.extraFields.ecwid_order_delivery_time_interval_start = ec.order.extraFi
 console.log("extraFields");
 console.log(ec.order.extraFields);
 console.log("orderDetailsDisplaySection");
-console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.orderDetailsDisplaySection);
+console.log(ec.order.extraFields['ecwid_order_delivery_time_interval_start']['orderDetailsDisplaySection']);
 
-function my_check(in_date) {
+function custom_app_33883008_3_my_check(in_date) {
     for (let j = 0; j < data.length; j++) {
         var blockout_date = new Date();
         blockout_date.setTime(data[j]);
@@ -32,7 +32,7 @@ for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_star
     var prev_options = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions;    
     console.log("prev_options");
     console.log(prev_options);
-    ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions.beforeShowDay = my_check;
+    ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions.beforeShowDay = custom_app_33883008_3_my_check ;
 }
 for (let i = 0; i < ec.order.extraFields.ecwid_order_pickup_time.overrides.length; i++) {
     var prev_options = ec.order.extraFields.ecwid_order_pickup_time.overrides[i].fieldsToOverride.datePickerOptions;    
