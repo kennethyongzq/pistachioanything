@@ -1,5 +1,5 @@
 Ecwid.OnAPILoaded.add(function() {
-    console.log("Version 12 : night time try6");
+    console.log("Version 13 : the next day ");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -17,8 +17,17 @@ Ecwid.OnAPILoaded.add(function() {
 
     console.log("orderDetailsDisplaySection");
     console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.orderDetailsDisplaySection);
-    console.log("1");
-    
+    console.log("overrides");
+    console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides);
+    console.log("overrides,length");
+    console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length);
+    console.log("overrides0,fields to override");
+    console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[0].fieldsToOverride);
+    console.log("overrides0,fields to override,datePickerOptions");
+    console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[0].fieldsToOverride.datePickerOptions);
+    console.log("overrides0,fields to override,datePickerOptions,disallowDates");
+    console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[0].fieldsToOverride.datePickerOptions.disallowDates);
+    /*
     for (var i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
         console.log("2");
         var prev_options = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions;    
@@ -29,7 +38,7 @@ Ecwid.OnAPILoaded.add(function() {
         ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions.disallowDates.push(['2021-12-04 00:00:00', '2021-12-04 23:59:59']);
     }
     console.log("3");
-    
+    */    
     console.log("extraFields after change");
     console.log(ec.order.extraFields);
 
