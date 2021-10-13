@@ -1,5 +1,5 @@
 Ecwid.OnAPILoaded.add(function() {
-    console.log("Version 12 : night time try5");
+    console.log("Version 12 : night time try6");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -19,7 +19,7 @@ Ecwid.OnAPILoaded.add(function() {
     console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.orderDetailsDisplaySection);
     console.log("1");
     
-    for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
+    for (var i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
         console.log("2");
         var prev_options = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions;    
         console.log("prev_options");
