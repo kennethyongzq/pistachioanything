@@ -1,4 +1,4 @@
-console.log("Version 10 : orderDetailsDisplaySection");
+console.log("Version 10 : just put it all over the damn place");
 var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
 console.log(data);
 data = JSON.parse(data)
@@ -29,7 +29,11 @@ function custom_app_33883008_3_my_check(in_date) {
     }
     return [true, "", ""];
 }
+ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides || [];
 for (let i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
+    ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride || {};
+    
+    ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions || {};
     var prev_options = ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions;    
     console.log("prev_options");
     console.log(prev_options);
