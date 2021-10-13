@@ -1,4 +1,4 @@
-console.log("Version 9 : put it in a strring thingy");
+console.log("Version 9 : remove {}");
 var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
 console.log(data);
 data = JSON.parse(data)
@@ -7,7 +7,6 @@ console.log(data);
 ec = ec || {};
 ec.order = ec.order || {};
 ec.order.extraFields = ec.order.extraFields || {};
-ec.order.extraFields.ecwid_order_delivery_time_interval_start = ec.order.extraFields.ecwid_order_delivery_time_interval_start || {};
 
 
 
