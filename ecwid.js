@@ -1,4 +1,4 @@
-console.log("Version 6 : {}");
+console.log("Version 7 : {}");
 var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
 console.log(data);
 data = JSON.parse(data)
@@ -8,6 +8,9 @@ ec = ec || {};
 ec.order = ec.order || {};
 ec.order.extraFields = ec.order.extraFields || {};
 ec.order.extraFields.ecwid_order_delivery_time_interval_start = ec.order.extraFields.ecwid_order_delivery_time_interval_start || {};
+
+
+
 console.log("extraFields");
 console.log(ec.order.extraFields);
 function my_check(in_date) {
