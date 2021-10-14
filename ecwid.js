@@ -1,6 +1,6 @@
-Ecwid.OnCartChanged.add(function(cart){
-    console.log("OnCartChanged");
-    console.log("Version 17 : move code to OnCartChanged");
+function update_blockout_dates(){
+    console.log("update_blockout_dates");
+    console.log("Version 17 : update_blockout_dates also during page loaded");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -69,7 +69,11 @@ Ecwid.OnCartChanged.add(function(cart){
     console.log(ec.order.extraFields);
 
 
-    Ecwid.refreshConfig();
+    Ecwid.refreshConfig();        
+}
+
+Ecwid.OnCartChanged.add(function(cart){
+    update_blockout_dates();
 });
 
 Ecwid.OnPageLoad.add(function(page) {
@@ -79,9 +83,8 @@ Ecwid.OnPageLoad.add(function(page) {
 
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
-    if (page.type == "CHECKOUT_DELIVERY") {
-        
-    }
+    update_blockout_dates();    
+    
 });
 
 
