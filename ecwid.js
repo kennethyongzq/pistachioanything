@@ -1,7 +1,7 @@
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
     if (page.type == "CHECKOUT_DELIVERY") {
-        console.log("Version 13 : the next day4 : Ecwid.refreshConfig();");
+        console.log("Version 14 : the next day4 : Ecwid.refreshConfig() change 1;");
         var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
         console.log(data);
         data = JSON.parse(data)
@@ -28,10 +28,10 @@ Ecwid.OnPageLoaded.add(function(page) {
         console.log("overrides0,fields to override,datePickerOptions");
         console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[0].fieldsToOverride.datePickerOptions);
         console.log("overrides0,fields to override,datePickerOptions,disallowDates");
-        console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[0].fieldsToOverride.datePickerOptions.disallowDates);
-        ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions.disallowDates.push('2021-12-04 00:00:00');
-        ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions.disallowDates.push('2021-12-04 23:59:59');
-        console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[0].fieldsToOverride.datePickerOptions.disallowDates);
+        console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[1].fieldsToOverride.datePickerOptions.disallowDates);
+        ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[1].fieldsToOverride.datePickerOptions.disallowDates.push('2021-12-04 00:00:00');
+        ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[1].fieldsToOverride.datePickerOptions.disallowDates.push('2021-12-04 23:59:59');
+        console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[1].fieldsToOverride.datePickerOptions.disallowDates);
         /*
         for (var i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
             console.log("2");
