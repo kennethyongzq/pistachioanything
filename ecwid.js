@@ -1,7 +1,7 @@
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
     if (page.type == "CHECKOUT_DELIVERY") {
-        console.log("Version 14 : array_to_append");
+        console.log("Version 15 : try to refresh config after push");
         var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
         console.log(data);
         data = JSON.parse(data)
@@ -30,9 +30,16 @@ Ecwid.OnPageLoaded.add(function(page) {
         console.log("overrides0,fields to override,datePickerOptions,disallowDates");
         console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[1].fieldsToOverride.datePickerOptions.disallowDates);
         var array_to_append = new Array('2021-12-04 00:00:00', '2021-12-04 23:59:59');
-        
         console.log("array_to_append");
         console.log(array_to_append);
+      
+        console.log("overrides0,fields to override,datePickerOptions,disallowDates, after push");
+        ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[1].fieldsToOverride.datePickerOptions.disallowDates.push(array_to_append);
+        console.log(ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[1].fieldsToOverride.datePickerOptions.disallowDates);
+        
+
+        console.log("Ecwid.Array");
+        console.log(Ecwid.Array);
         /*
         for (var i = 0; i < ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides.length; i++) {
             console.log("2");
@@ -49,7 +56,7 @@ Ecwid.OnPageLoaded.add(function(page) {
         console.log(ec.order.extraFields);
 
 
-        //Ecwid.refreshConfig();
+        Ecwid.refreshConfig();
     }
 });
 
