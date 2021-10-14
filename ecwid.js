@@ -1,4 +1,4 @@
-Ecwid.OnPageLoaded.add(function(page) {
+Ecwid.OnPageLoad.add(function(page) {
     console.log("OnPageLoad");
     console.log("Current page is of type: " + page.type);
 });
@@ -6,7 +6,7 @@ Ecwid.OnPageLoaded.add(function(page) {
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
     if (page.type == "CHECKOUT_DELIVERY") {
-        console.log("Version 16 : on page load");
+        console.log("Version 17 : on page load2");
         var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
         console.log(data);
         data = JSON.parse(data)
