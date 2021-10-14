@@ -1,7 +1,7 @@
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
     if (page.type == "CHECKOUT_DELIVERY") {
-        console.log("Version 16 : put in the blockout dates from data, plus pickup also");
+        console.log("Version 16 : put in the blockout dates from data, plus pickup also, i!!");
         var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
         console.log(data);
         data = JSON.parse(data)
@@ -49,7 +49,7 @@ Ecwid.OnPageLoaded.add(function(page) {
                 var array_to_append = new Array(blockout_date.getFullYear() + "-" + String(blockout_date.getMonth()+1).padStart(2, '0') + "-" + String(blockout_date.getDate()).padStart(2, '0') + " 00:00:00", blockout_date.getFullYear() + "-" + String(blockout_date.getMonth()+1).padStart(2, '0') + "-" + String(blockout_date.getDate()).padStart(2, '0') + " 23:59:59");
                 console.log("array_to_append");
                 console.log(array_to_append);
-                ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[1].fieldsToOverride.datePickerOptions.disallowDates.push(array_to_append);
+                ec.order.extraFields.ecwid_order_delivery_time_interval_start.overrides[i].fieldsToOverride.datePickerOptions.disallowDates.push(array_to_append);
             }
         }
         for (var i = 0; i < ec.order.extraFields.ecwid_order_pickup_time.overrides.length; i++) {
@@ -61,7 +61,7 @@ Ecwid.OnPageLoaded.add(function(page) {
                 var array_to_append = new Array(blockout_date.getFullYear() + "-" + String(blockout_date.getMonth()+1).padStart(2, '0') + "-" + String(blockout_date.getDate()).padStart(2, '0') + " 00:00:00", blockout_date.getFullYear() + "-" + String(blockout_date.getMonth()+1).padStart(2, '0') + "-" + String(blockout_date.getDate()).padStart(2, '0') + " 23:59:59");
                 console.log("array_to_append");
                 console.log(array_to_append);
-                ec.order.extraFields.ecwid_order_pickup_time.overrides[1].fieldsToOverride.datePickerOptions.disallowDates.push(array_to_append);
+                ec.order.extraFields.ecwid_order_pickup_time.overrides[i].fieldsToOverride.datePickerOptions.disallowDates.push(array_to_append);
             }
         }
         
