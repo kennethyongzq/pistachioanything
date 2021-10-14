@@ -1,7 +1,7 @@
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
     if (page.type == "CHECKOUT_DELIVERY") {
-        console.log("Version 13 : the next day3 : Disallow dates after change");
+        console.log("Version 13 : the next day4 : Ecwid.refreshConfig();");
         var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
         console.log(data);
         data = JSON.parse(data)
@@ -48,7 +48,7 @@ Ecwid.OnPageLoaded.add(function(page) {
         console.log(ec.order.extraFields);
 
 
-        //Ecwid.refreshConfig();
+        Ecwid.refreshConfig();
     }
 });
 
