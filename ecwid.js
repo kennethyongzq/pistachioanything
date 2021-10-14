@@ -1,7 +1,8 @@
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoad");
     console.log("Current page is of type: " + page.type);
-}
+});
+
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
     if (page.type == "CHECKOUT_DELIVERY") {
