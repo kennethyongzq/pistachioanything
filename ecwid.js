@@ -1,3 +1,7 @@
+Ecwid.OnCartChanged.add(function(cart){
+    console.log("OnCartChanged");
+});
+
 Ecwid.OnPageLoad.add(function(page) {
     console.log("OnPageLoad");
     console.log("Current page is of type: " + page.type);
