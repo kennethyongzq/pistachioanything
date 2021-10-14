@@ -10,7 +10,7 @@ Ecwid.OnPageLoad.add(function(page) {
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
     if (page.type == "CHECKOUT_DELIVERY") {
-        console.log("Version 17 : on page load2");
+        console.log("Version 17 : OnCartChanged");
         var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
         console.log(data);
         data = JSON.parse(data)
