@@ -1,7 +1,11 @@
 Ecwid.OnPageLoaded.add(function(page) {
+    console.log("OnPageLoad");
+    console.log("Current page is of type: " + page.type);
+}
+Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
     if (page.type == "CHECKOUT_DELIVERY") {
-        console.log("Version 16 : put in the blockout dates from data, plus pickup also, i!!");
+        console.log("Version 16 : on page load");
         var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
         console.log(data);
         data = JSON.parse(data)
