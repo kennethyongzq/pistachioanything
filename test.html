@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings (v1)</h1>
+				<h1>Delivery Date Settings (v2)</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -132,8 +132,8 @@
 		});
 	});
 	function loadBlockoutDates(data){
-		var parsed_data = JSON.parse(data);
-		var parsed_data = data.blockout_dates;
+		var parsed_data = JSON.parse(data).blockout_dates;
+
 		for (var i = 0; i < parsed_data.length; i++) { 
 			var date = new Date();
 			date.setTime(parsed_data[i]);
