@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.1</h1>
+				<h1>Delivery Date Settings V3.2</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -94,45 +94,26 @@
 				<div class="form-area__action">
 					<button type="button" onclick="onAddClick()" class="btn btn-primary btn-medium">Add</button>
 				</div>
-				<h3>Add SKU </h3>
-
+				<h3>Add Inventory</h3>
+				<p>Add Inventory at the point of date</p>
+				<div id="inventory_div">
+				</div>
 				<div class="form-area__content">
-					<p>Register a product to be inventoriable</p>
-					<table id="sku-table">
-						<tr>
-						<th>ID </th>
-						<th>Name</th>
-						<th></th>
-						</tr>
-					</table>
-					<br>
+					<div class="fieldsets-batch">
+						<div class="fieldset">
+							<div class="field field--medium">
+								<label class="field__label">Date</label>
+								<input id="inventory_date" type="text" class="field__input" tabindex="4" maxlength="64">
+								<div class="field__placeholder">Date</div>
+							</div>
+						</div>
+
+					</div>
 				</div>
 				<div class="form-area__action">
-					<button type="button" onclick="$('#addSkuModal').show();" class="btn btn-primary btn-medium">Add</button>
-					
-							<div hidden id = "addSkuModal" class="main-overlay">
-								<div class="main-popup main-popup_center main-popup--thin-padding main-popup_animation">
-									<div class="main-popup__container">
-										<div class="main-popup__close">
-											<svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.7929 1.7929c.3905-.3905 1.0237-.3905 1.4142 0L9 7.5858l5.7929-5.793c.3905-.3904 1.0237-.3904 1.4142 0 .3905.3906.3905 1.0238 0 1.4143L10.4142 9l5.7929 5.7929c.3905.3905.3905 1.0237 0 1.4142-.3905.3905-1.0237.3905-1.4142 0L9 10.4142l-5.7929 5.7929c-.3905.3905-1.0237.3905-1.4142 0-.3905-.3905-.3905-1.0237 0-1.4142L7.5858 9l-5.793-5.7929c-.3904-.3905-.3904-1.0237 0-1.4142z"></path></svg>
-										</div>
-										<div class="main-popup__subcontainer">
-											<h3 class="main-popup__title"> <span class="gwt-InlineHTML" style="">Select Product to register</span> </h3>
-											<div class="main-popup__text" aria-hidden="true" style="display: none;"></div>
-											<div class="main-popup__content" style="">
-												<div>
-													
-													
-												</div>
-											</div>
-											<div class="main-popup__buttons"><button type="button" class="btn btn-primary btn-medium" tabindex="1000">Mark as Shipped</button></div>
-											<div class="main-popup__footer-text" aria-hidden="true" style="display: none;"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-
+					<button type="button" onclick="onInvAddClick()" class="btn btn-primary btn-medium">Add</button>
 				</div>
+
 				</div>
 				<h5>Log:</h5>
 				<p id="krstest"></p>
@@ -147,6 +128,7 @@
 	$(document).ready(function(){
 		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
+		$( "#inventory_date" ).datepicker({dateFormat: "dd M yy"});
 
 		EcwidApp.getAppPublicConfig(function(publicData) {
 			krslog("EcwidApp.getAppPublicConfig Success");
@@ -192,10 +174,35 @@
 		pushToStorage();
 	
 	}
-	function onSkuAddClick(){
-		var val = $("#blockout_date").datepicker('getDate');
-		addBlockoutDate(val);
-		pushToStorage();
+	function addInventoryDate(date){
+		if (date){
+			var xhttp = new XMLHttpRequest();
+			var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/products"
+
+			krslog("GET:requestURL:" + requestURL);
+			xhttp.open("GET", requestURL, true);
+			xhttp.send();
+
+			xhttp.onreadystatechange = function() {
+
+				krslog("xhttp.readyState = " + xhttp.readyState);
+				krslog("xhttp.status = " + xhttp.status);
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					var apiResponse = xhttp.responseText;
+					var products = JSON.parse(apiResponse);
+					krslog("Success: GET success (" + products.count + " / " + products.total);
+					for (var i = 0 ; i < products.items.length; i++){
+						krslog(products.items[i].id);	
+						krslog(products.items[i].name);
+					}
+				}
+			};	
+		}
+	}
+	function onInvAddClick(){
+		var val = $("#inventory_date").datepicker('getDate');
+		addInventoryDate(val);
+		//pushToStorage();
 	
 	}
 	function pushToStorage(){
