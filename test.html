@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.10</h1>
+				<h1>Delivery Date Settings V3.11</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -125,7 +125,7 @@
 			krslog(publicData);
 		
 			loadBlockoutDates(publicData);
-			//loadSKU(publicData);
+			loadSKU(publicData);
 		});
 	});
 	function populateSkuTable(){
@@ -145,7 +145,7 @@
 				var products = JSON.parse(apiResponse);
 				krslog("Success: GET success (" + products.count + " / " + products.total + ")");				
 				for (var i = 0 ; i < products.items.length; i++){
-					$checkbox = $('<input id = "skucheckbox-' + products.items[i].id + '"');
+					$checkbox = $('<input id = "skucheckbox-' + products.items[i].id + '">');
 					$checkbox.addClass('custom-checkbox__input');					
 					$checkbox.addClass('skucheckbox');
 					$checkbox.prop('checked', false);
