@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings (v2)</h1>
+				<h1>Delivery Date Settings (v3)</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -109,21 +109,7 @@
 	$(document).ready(function(){
 		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
-		// reconfigure
-		EcwidApp.getAppPublicConfig(function(publicData) {
 
-			var parsed_data = JSON.parse(publicData);
-			if (!('blockout_dates' in parsed_data)){
-				krslog("Excecuting data migration");
-				var new_data = {'blockout_dates':parsed_data}
-				EcwidApp.setAppPublicConfig(new_data, function(){
-					krslog("EcwidApp.setAppPublicConfig Success, new data");
-					krslog(new_data);
-				});
-			}
-
-		});
-		// End reconfigure	
 		EcwidApp.getAppPublicConfig(function(publicData) {
 			krslog("EcwidApp.getAppPublicConfig Success");
 			krslog(publicData);
