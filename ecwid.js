@@ -1,9 +1,10 @@
 function update_blockout_dates(){
     console.log("update_blockout_dates");
-    console.log("Version 1 : 14 OCT 2021");
+    console.log("Version 2 : 29 NOV 2021");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
+    data = data.blockout_dates;
     console.log(data);
 
     ec = ec || {};
