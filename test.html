@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.4</h1>
+				<h1>Delivery Date Settings V3.5</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -190,16 +190,17 @@
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 					var apiResponse = xhttp.responseText;
 					var products = JSON.parse(apiResponse);
-					krslog("Success: GET success (" + products.count + " / " + products.total);
-					var new_item_div = $('<div>');
-					new_item_div.addClass('a-card');
-					
+					krslog("Success: GET success (" + products.count + " / " + products.total + ")");
+					var $new_inv_div = $('<div>');
+					$new_inv_div.addClass('a-card');
+
+
 					for (var i = 0 ; i < products.items.length; i++){
 						
 						krslog(products.items[i].id);	
 						krslog(products.items[i].name);
 					}
-					$('#inventory_div').append(new_item_div);
+					$('#inventory_div').append($new_inv_div);
 					$('#inventory_div').append($('<br>'));
 				}
 			};	
