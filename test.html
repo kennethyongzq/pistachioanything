@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings</h1>
+				<h1>Delivery Date Settings (v1)</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -109,15 +109,31 @@
 	$(document).ready(function(){
 		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
-		
+		// reconfigure
+		EcwidApp.getAppPublicConfig(function(publicData) {
+
+			var parsed_data = JSON.parse(publicData);
+			if (!('blockout_dates' in parsed_data)){
+				krslog("Excecuting data migration");
+				var new_data = {'blockout_dates':parsed_data}
+				EcwidApp.setAppPublicConfig(new_data, function(){
+					krslog("EcwidApp.setAppPublicConfig Success, new data");
+					krslog(new_data);
+				});
+			}
+
+		});
+		// End reconfigure	
 		EcwidApp.getAppPublicConfig(function(publicData) {
 			krslog("EcwidApp.getAppPublicConfig Success");
 			krslog(publicData);
+		
 			loadBlockoutDates(publicData);
 		});
 	});
 	function loadBlockoutDates(data){
 		var parsed_data = JSON.parse(data);
+		var parsed_data = data.blockout_dates;
 		for (var i = 0; i < parsed_data.length; i++) { 
 			var date = new Date();
 			date.setTime(parsed_data[i]);
@@ -153,17 +169,17 @@
 	
 	}
 	function pushToStorage(){
-
+		var to_push = {}
 		var list_of_dates = [];
 		$('.blockoutdate').each(function() {		
 		    list_of_dates.push($(this).text());
 		});
-		var list_of_dates_to_json_str = JSON.stringify(list_of_dates);
 		
-
-		EcwidApp.setAppPublicConfig(list_of_dates_to_json_str, function(){
+		to_push['blockout_dates'] = list_of_dates;
+		var json_str = JSON.stringify(list_of_dates);
+		EcwidApp.setAppPublicConfig(json_str, function(){
 			krslog("EcwidApp.setAppPublicConfig Success");
-			krslog(list_of_dates_to_json_str);
+			krslog(json_str);
 		});
 
 	}
