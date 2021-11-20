@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings (v3)</h1>
+				<h1>Delivery Date Settings (v4 - bug in to push)</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -162,7 +162,7 @@
 		});
 		
 		to_push['blockout_dates'] = list_of_dates;
-		var json_str = JSON.stringify(list_of_dates);
+		var json_str = JSON.stringify(to_push);
 		EcwidApp.setAppPublicConfig(json_str, function(){
 			krslog("EcwidApp.setAppPublicConfig Success");
 			krslog(json_str);
