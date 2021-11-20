@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.16</h1>
+				<h1>Delivery Date Settings V3.19</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -106,7 +106,9 @@
 					</table>
 				</div>
 				<h5>Log:</h5>
-				<p id="krstest"></p>
+				<div>
+				<p style="word-break: break-all; white-space: normal;" id="krstest"></p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -161,15 +163,18 @@
 		};	
 	}
 	function loadSKU(data){
+		krslog("loadSKU");
 
 		var parsed_data = JSON.parse(data);
 		if ('sku' in parsed_data){
 			parsed_data = parsed_data.sku;
 			for (var i = 0; i < parsed_data.length; i++) { 
 				var id_str = "skucheckbox-" + parsed_data[i] ;
+				krslog(id_str);
 				$("#"+id_str).prop('checked', true);
 			}
 		}
+		krslog("loadSKU end");
 	}
 	
 	function loadBlockoutDates(data){
@@ -230,7 +235,9 @@
 		});
 		var list_of_sku = [];
 		$('.skucheckbox').each(function() {		
-		    list_of_sku.push($(this).attr('id').substring(12));
+			if ($(this).is(':checked')){
+			    list_of_sku.push($(this).attr('id').substring(12));
+			}
 		});
 		
 		to_push['blockout_dates'] = list_of_dates;
