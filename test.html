@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.26</h1>
+				<h1>Delivery Date Settings V3.27</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -149,7 +149,7 @@
 				for (var i = 0 ; i < products.items.length; i++){
 					$checkbox = $('<input type="checkbox" id = "skucheckbox-' + products.items[i].id + '">');
 					$checkbox.addClass('skucheckbox');
-					$checkbox.prop( "checked", false).trigger('click');
+					$checkbox.removeAttr('checked');
 					$checkbox.change(function() {
 						pushToStorage();
 					    });
@@ -170,7 +170,7 @@
 			for (var i = 0; i < parsed_data.length; i++) { 
 				var id_str = "skucheckbox-" + parsed_data[i] ;
 
-				$("#"+id_str).prop( "checked", true).trigger('click');
+				$("#"+id_str).attr ( "checked" ,"checked" );
 			}
 		}
 		krslog("loadSKU end");
