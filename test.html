@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.20</h1>
+				<h1>Delivery Date Settings V3.21</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -94,9 +94,9 @@
 				<div class="form-area__action">
 					<button type="button" onclick="onAddClick()" class="btn btn-primary btn-medium">Add</button>
 				</div>
-				<h3>SKU Settings</h3>
+				<h3>Inventorisable Products</h3>
 				<div class="form-area__content">
-					<p>Select SKU to be inventorised</p>
+					<p>Select product to be considered for inventory</p>
 					<table id="sku-table">
 						<tr>
 						<th>ID</th>
@@ -149,7 +149,7 @@
 				for (var i = 0 ; i < products.items.length; i++){
 					$checkbox = $('<input type="checkbox" id = "skucheckbox-' + products.items[i].id + '">');
 					$checkbox.addClass('skucheckbox');
-					$checkbox.prop('checked', 'checked');
+					$checkbox.attr('checked', false);
 					$checkbox.change(function() {
 						pushToStorage();
 					    });
@@ -163,15 +163,14 @@
 		};	
 	}
 	function loadSKU(data){
-		krslog("loadSKU");
 
 		var parsed_data = JSON.parse(data);
 		if ('sku' in parsed_data){
 			parsed_data = parsed_data.sku;
 			for (var i = 0; i < parsed_data.length; i++) { 
 				var id_str = "skucheckbox-" + parsed_data[i] ;
-				krslog(id_str);
-				$("#"+id_str).prop('checked', true);
+
+				$("#"+id_str).attr('checked', true);
 			}
 		}
 		krslog("loadSKU end");
