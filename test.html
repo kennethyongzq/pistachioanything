@@ -19,6 +19,7 @@
     var storeId = storeData.store_id;
     var accessToken = storeData.access_token;
     var language = storeData.lang;
+    var publicData;
 
 
     if (storeData.public_token !== undefined){
@@ -45,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.42</h1>
+				<h1>Delivery Date Settings V3.43</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -157,13 +158,13 @@
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#inventory_date" ).datepicker({dateFormat: "dd M yy"});
 
-		EcwidApp.getAppPublicConfig(function(publicData) {
-
+		EcwidApp.getAppPublicConfig(function(data) {
+			publicData = data;
 			krslog("EcwidApp.getAppPublicConfig Success");
 			krslog(publicData);
 			loadSkuTable();	
-			loadBlockoutDates(publicData);
-			loadInvTable(publicData);
+			loadBlockoutDates();
+			loadInvTable();
 			
 		});
 	});
@@ -196,8 +197,8 @@
 			$('<td>').append($button));
 		$tr.appendTo('#inventory-table');	
 	}
-	function loadInvTable(publicData){
-		var parsed_data = JSON.parse(data);
+	function loadInvTable(){
+		var parsed_data = JSON.parse(publicData);
 		if ('inv' in parsed_data){
 			parsed_data = parsed_data.inv;
 			for (var i = 0; i < parsed_data.length; i++) { 
@@ -242,13 +243,13 @@
 							$('<td>').append($button));
 					$tr.appendTo('#sku-table');	
 				}
-				loadSKU(publicData);
+				loadSKU();
 			}
 		};	
 	}
-	function loadSKU(data){
+	function loadSKU(){
 
-		var parsed_data = JSON.parse(data);
+		var parsed_data = JSON.parse(publicData);
 		if ('sku' in parsed_data){
 			parsed_data = parsed_data.sku;
 			for (var i = 0; i < parsed_data.length; i++) { 
@@ -261,8 +262,8 @@
 		krslog("loadSKU end");
 	}
 	
-	function loadBlockoutDates(data){
-		var parsed_data = JSON.parse(data);
+	function loadBlockoutDates(){
+		var parsed_data = JSON.parse(publicData);
 		if ('blockout_dates' in parsed_data){
 			parsed_data = parsed_data.blockout_dates;
 			for (var i = 0; i < parsed_data.length; i++) { 
@@ -303,7 +304,7 @@
 	function addInventoryDate(date){
 		if (date){
 			EcwidApp.getAppPublicConfig(function(data) {
-
+				publicData = data
 				krslog("EcwidApp.getAppPublicConfig Success");
 				krslog(publicData);
 				var parsed_data = JSON.parse(data);
