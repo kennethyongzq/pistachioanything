@@ -19,6 +19,7 @@
     var storeId = storeData.store_id;
     var accessToken = storeData.access_token;
     var language = storeData.lang;
+    var publicData;
 
     if (storeData.public_token !== undefined){
       var publicToken = storeData.public_token;
@@ -43,7 +44,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.34</h1>
+				<h1>Delivery Date Settings V3.35</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -122,12 +123,13 @@
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#inventory_date" ).datepicker({dateFormat: "dd M yy"});
 
-		EcwidApp.getAppPublicConfig(function(publicData) {
+		EcwidApp.getAppPublicConfig(function(data) {
+			publicData = data;
 			krslog("EcwidApp.getAppPublicConfig Success");
 			krslog(publicData);
 			populateSkuTable();	
 			loadBlockoutDates(publicData);
-			loadSKU(publicData);
+			
 		});
 	});
 	function populateSkuTable(){
@@ -170,6 +172,7 @@
 							$('<td>').append($button));
 					$tr.appendTo('#sku-table');	
 				}
+				loadSKU(publicData);
 			}
 		};	
 	}
