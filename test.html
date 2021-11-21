@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.46</h1>
+				<h1>Delivery Date Settings V3.47</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -167,13 +167,13 @@
 		});
 	});
 	function getIdFromSkuButton(button){
-		$(button).attr('id').substring(12)
+		button.attr('id').substring(12)
 	}
 	function getEpochFromInvInput(input){
-		return $(input).attr('id').split("-")[1];
+		return input.attr('id').split("-")[1];
 	}
 	function getPidFromInvInput(input){
-		return $(input).attr('id').split("-")[2];
+		return input.attr('id').split("-")[2];
 	}
 	function addInvItem(epoch, id, qty){
 		var id_str = "#skucheckbox-" + id ;
