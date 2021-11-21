@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.43</h1>
+				<h1>Delivery Date Settings V3.44</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -164,8 +164,6 @@
 			krslog(publicData);
 			loadSkuTable();	
 			loadBlockoutDates();
-			loadInvTable();
-			
 		});
 	});
 	function getIdFromSkuButton(button){
@@ -244,6 +242,7 @@
 					$tr.appendTo('#sku-table');	
 				}
 				loadSKU();
+				loadInvTable();
 			}
 		};	
 	}
