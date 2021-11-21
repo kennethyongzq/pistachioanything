@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.33</h1>
+				<h1>Delivery Date Settings V3.34</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -121,11 +121,11 @@
 		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#inventory_date" ).datepicker({dateFormat: "dd M yy"});
-		populateSkuTable();
+
 		EcwidApp.getAppPublicConfig(function(publicData) {
 			krslog("EcwidApp.getAppPublicConfig Success");
 			krslog(publicData);
-		
+			populateSkuTable();	
 			loadBlockoutDates(publicData);
 			loadSKU(publicData);
 		});
@@ -150,6 +150,7 @@
 					$button = $('<button id="skucheckbox-' + products.items[i].id + '">');
 					$button.addClass('skucheckbox');
 					$button.addClass('btn btn-default');
+					$button.text('Unregistered');
 					$button.click(function() {
 						if ($(this).hasClass('btn-default')){
 							$(this).removeClass('btn-default');
@@ -179,11 +180,12 @@
 			parsed_data = parsed_data.sku;
 			for (var i = 0; i < parsed_data.length; i++) { 
 
-				var id_str = "skucheckbox-" + parsed_data[i] ;
+				var id_str = "#skucheckbox-" + parsed_data[i] ;
 				krslog(id_str);
-				$("#"+id_str).removeClass('btn-default');
-				$("#"+id_str).addClass('btn-success');
-				$("#"+id_str).text('Registered');
+				$(id_str).removeClass('btn-default');
+				$(id_str).addClass('btn-success');
+				$(id_str).text('Registered');
+
 			}
 		}
 		krslog("loadSKU end");
