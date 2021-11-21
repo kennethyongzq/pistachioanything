@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.49</h1>
+				<h1>Delivery Date Settings V3.50</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -311,7 +311,7 @@
 				krslog(publicData);
 				var parsed_data = JSON.parse(data);
 				if ('sku' in parsed_data){
-					parsed_data = parsed_data.inv;
+					parsed_data = parsed_data.sku;
 					for (var i = 0; i < parsed_data.length; i++) { 
 						addInvItem(epoch,parsed_data[i],5);
 					}
