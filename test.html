@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.45</h1>
+				<h1>Delivery Date Settings V3.46</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -300,7 +300,9 @@
 		pushToStorage();
 	
 	}
-	function addInventoryDate(date){
+	
+	function onInvAddClick(){
+		var date = $("#inventory_date").datepicker('getDate');
 		if (date){
 			EcwidApp.getAppPublicConfig(function(data) {
 				publicData = data
@@ -317,10 +319,6 @@
 			});
 
 		}
-	}
-	function onInvAddClick(){
-		var val = $("#inventory_date").datepicker('getDate');
-		addInventoryDate(val);
 	}
 	function pushToStorage(){
 		var to_push = {}
