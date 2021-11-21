@@ -45,7 +45,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.39</h1>
+				<h1>Delivery Date Settings V3.41</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -166,8 +166,14 @@
 			
 		});
 	});
-	function getIdFromSkuButton(var button){
-		button.attr('id').substring(12)
+	function getIdFromSkuButton(button){
+		$(button).attr('id').substring(12)
+	}
+	function getEpochFromInvInput(input){
+		return $(input).attr('id').split("-")[1];
+	}
+	function getPidFromInvInput(input){
+		return $(input).attr('id').split("-")[2];
 	}
 	function populateSkuTable(){
 		var xhttp = new XMLHttpRequest();
@@ -285,16 +291,19 @@
 							$(this).parent().parent().remove();
 							pushToStorage();
 						});
-
+						$input = $('<input id="invinput-'+epoch+'-'+parsed_data[i]+'" type="number" class="field__input invinput" maxlength="10">');
+						$input.val(5);
+						
 						var $tr = $('<tr>').append(
 							$('<td>').text(date.toLocaleDateString()),
 							$('<td>').text(epoch),
 							$('<td>').text($(id_str).text()),
-							$('<td>').text(''),
+							$('<td>').text($input),
 							$('<td>').append($button));
 						$tr.appendTo('#blockout-table');
 					}
 				}
+				pushToStorage();
 			});
 
 		}
@@ -317,9 +326,19 @@
 			    list_of_sku.push(getIdFromSkuButton($(this));
 			}
 		});
+		var list_of_inv = [];
+		$('.invinput').each(function() {		
+			var epoch = getEpochFromInvInput($(this));
+			var pid = getPidFromInvInput($(this));
+			var qty = $(this).val();
+			list_of_inv.push({'epoch':epoch,
+					  'pic':pid,
+					  'qty':qty});
+		});
 		
 		to_push['blockout_dates'] = list_of_dates;
 		to_push['sku'] = list_of_sku;
+		to_push['inv'] = list_of_inv;
 		var json_str = JSON.stringify(to_push);
 		EcwidApp.setAppPublicConfig(json_str, function(){
 			krslog("EcwidApp.setAppPublicConfig Success");
