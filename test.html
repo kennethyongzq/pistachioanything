@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.29</h1>
+				<h1>Delivery Date Settings V3.30</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -147,10 +147,20 @@
 				var products = JSON.parse(apiResponse);
 				krslog("Success: GET success (" + products.count + " / " + products.total + ")");				
 				for (var i = 0 ; i < products.items.length; i++){
-					$checkbox = $('<input type="checkbox" id = "skucheckbox-' + products.items[i].id + '">');
+					$checkbox = $('<button id="skucheckbox-' + products.items[i].id + '">');
 					$checkbox.addClass('skucheckbox');
-					$checkbox.removeAttr('checked');
+					$checkbox.addClass('btn btn-default');
 					$checkbox.change(function() {
+						if ($(this).hasClass('btn-default')){
+							$(this).removeClass('btn-default');
+							$(this).addClass('btn-success');
+							$(this).text('Registered');
+						}
+						else{
+							$(this).removeClass('btn-success');
+							$(this).addClass('btn-default');
+							$(this).text('Unregistered');
+						}
 						pushToStorage();
 					    });
 					$tr = $('<tr>').append(
@@ -169,8 +179,9 @@
 			parsed_data = parsed_data.sku;
 			for (var i = 0; i < parsed_data.length; i++) { 
 				var id_str = "skucheckbox-" + parsed_data[i] ;
-
-				$("#"+id_str).prop("checked" ,"checked");
+				$("#"+id_str).removeClass('btn-default');
+				$("#"+id_str).addClass('btn-success');
+				$("#"+id_str).text('Registered');
 			}
 		}
 		krslog("loadSKU end");
@@ -234,7 +245,7 @@
 		});
 		var list_of_sku = [];
 		$('.skucheckbox').each(function() {		
-			if ($(this).is(':checked')){
+			if ($(this).hasClass('btn-success')){
 			    list_of_sku.push($(this).attr('id').substring(12));
 			}
 		});
