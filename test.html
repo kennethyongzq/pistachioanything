@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.32</h1>
+				<h1>Delivery Date Settings V3.33</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -147,26 +147,26 @@
 				var products = JSON.parse(apiResponse);
 				krslog("Success: GET success (" + products.count + " / " + products.total + ")");				
 				for (var i = 0 ; i < products.items.length; i++){
-					$checkbox = $('<button id="skucheckbox-' + products.items[i].id + '">');
-					$checkbox.addClass('skucheckbox');
-					$checkbox.addClass('btn btn-default');
-					$checkbox.click(function() {
+					$button = $('<button id="skucheckbox-' + products.items[i].id + '">');
+					$button.addClass('skucheckbox');
+					$button.addClass('btn btn-default');
+					$button.click(function() {
 						if ($(this).hasClass('btn-default')){
 							$(this).removeClass('btn-default');
 							$(this).addClass('btn-success');
-							$(this).prop('value', 'Registered');
+							$(this).text('Registered');
 						}
 						else{
 							$(this).removeClass('btn-success');
 							$(this).addClass('btn-default');
-							$(this).prop('value', 'Unregistered');
+							$(this).text('Unregistered');
 						}
 						pushToStorage();
 					    });
 					$tr = $('<tr>').append(
 							$('<td>').text(products.items[i].id),
 							$('<td>').text(products.items[i].name),
-							$('<td>').append($checkbox));
+							$('<td>').append($button));
 					$tr.appendTo('#sku-table');	
 				}
 			}
@@ -183,7 +183,7 @@
 				krslog(id_str);
 				$("#"+id_str).removeClass('btn-default');
 				$("#"+id_str).addClass('btn-success');
-				$("#"+id_str).prop('value', 'Registered');
+				$("#"+id_str).text('Registered');
 			}
 		}
 		krslog("loadSKU end");
