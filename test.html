@@ -43,7 +43,7 @@
 	<div class="a-card a-card--normal">
 		<div class="a-card__paddings">
 			<div class="form-area">
-				<h1>Delivery Date Settings V3.30</h1>
+				<h1>Delivery Date Settings V3.32</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -150,16 +150,16 @@
 					$checkbox = $('<button id="skucheckbox-' + products.items[i].id + '">');
 					$checkbox.addClass('skucheckbox');
 					$checkbox.addClass('btn btn-default');
-					$checkbox.change(function() {
+					$checkbox.click(function() {
 						if ($(this).hasClass('btn-default')){
 							$(this).removeClass('btn-default');
 							$(this).addClass('btn-success');
-							$(this).text('Registered');
+							$(this).prop('value', 'Registered');
 						}
 						else{
 							$(this).removeClass('btn-success');
 							$(this).addClass('btn-default');
-							$(this).text('Unregistered');
+							$(this).prop('value', 'Unregistered');
 						}
 						pushToStorage();
 					    });
@@ -178,10 +178,12 @@
 		if ('sku' in parsed_data){
 			parsed_data = parsed_data.sku;
 			for (var i = 0; i < parsed_data.length; i++) { 
+
 				var id_str = "skucheckbox-" + parsed_data[i] ;
+				krslog(id_str);
 				$("#"+id_str).removeClass('btn-default');
 				$("#"+id_str).addClass('btn-success');
-				$("#"+id_str).text('Registered');
+				$("#"+id_str).prop('value', 'Registered');
 			}
 		}
 		krslog("loadSKU end");
