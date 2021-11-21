@@ -19,7 +19,7 @@
     var storeId = storeData.store_id;
     var accessToken = storeData.access_token;
     var language = storeData.lang;
-    var publicData;
+
 
     if (storeData.public_token !== undefined){
       var publicToken = storeData.public_token;
@@ -45,7 +45,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.41</h1>
+				<h1>Delivery Date Settings V3.42</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -157,12 +157,13 @@
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#inventory_date" ).datepicker({dateFormat: "dd M yy"});
 
-		EcwidApp.getAppPublicConfig(function(data) {
-			publicData = data;
+		EcwidApp.getAppPublicConfig(function(publicData) {
+
 			krslog("EcwidApp.getAppPublicConfig Success");
 			krslog(publicData);
-			populateSkuTable();	
+			loadSkuTable();	
 			loadBlockoutDates(publicData);
+			loadInvTable(publicData);
 			
 		});
 	});
@@ -175,7 +176,36 @@
 	function getPidFromInvInput(input){
 		return $(input).attr('id').split("-")[2];
 	}
-	function populateSkuTable(){
+	function addInvItem(epoch, id, qty){
+		var id_str = "#skucheckbox-" + id ;
+		$button = $('<button style="margin-left:30px;">');
+		$button.addClass('btn btn-default btn--destructive');
+		$button.text("Delete");
+		$button.click(function(){
+			$(this).parent().parent().remove();
+			pushToStorage();
+		});
+		$input = $('<input id="invinput-'+epoch+'-'+id+'" type="number" class="field__input invinput" maxlength="10">');
+		$input.val(qty);
+
+		var $tr = $('<tr>').append(
+			$('<td>').text(date.toLocaleDateString()),
+			$('<td>').text(epoch),
+			$('<td>').text($(id_str).text()),
+			$('<td>').text($input),
+			$('<td>').append($button));
+		$tr.appendTo('#inventory-table');	
+	}
+	function loadInvTable(publicData){
+		var parsed_data = JSON.parse(data);
+		if ('inv' in parsed_data){
+			parsed_data = parsed_data.inv;
+			for (var i = 0; i < parsed_data.length; i++) { 
+				addInvItem(parsed_data[i].epoch,parsed_data[i].pid,parsed_data[i].qty);
+			}
+		}
+	}
+	function loadSkuTable(){
 		var xhttp = new XMLHttpRequest();
 		var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/products?token="+accessToken
 
@@ -273,34 +303,14 @@
 	function addInventoryDate(date){
 		if (date){
 			EcwidApp.getAppPublicConfig(function(data) {
-				publicData = data;
+
 				krslog("EcwidApp.getAppPublicConfig Success");
 				krslog(publicData);
 				var parsed_data = JSON.parse(data);
 				if ('sku' in parsed_data){
 					parsed_data = parsed_data.sku;
 					for (var i = 0; i < parsed_data.length; i++) { 
-						
-						var id_str = "#skucheckbox-" + parsed_data[i] ;
-						
-						var epoch = date.getTime();
-						$button = $('<button style="margin-left:30px;">');
-						$button.addClass('btn btn-default btn--destructive');
-						$button.text("Delete");
-						$button.click(function(){
-							$(this).parent().parent().remove();
-							pushToStorage();
-						});
-						$input = $('<input id="invinput-'+epoch+'-'+parsed_data[i]+'" type="number" class="field__input invinput" maxlength="10">');
-						$input.val(5);
-						
-						var $tr = $('<tr>').append(
-							$('<td>').text(date.toLocaleDateString()),
-							$('<td>').text(epoch),
-							$('<td>').text($(id_str).text()),
-							$('<td>').text($input),
-							$('<td>').append($button));
-						$tr.appendTo('#blockout-table');
+						addInvItem(epoch,parsed_data[i],5);
 					}
 				}
 				pushToStorage();
@@ -311,8 +321,6 @@
 	function onInvAddClick(){
 		var val = $("#inventory_date").datepicker('getDate');
 		addInventoryDate(val);
-		pushToStorage();
-	
 	}
 	function pushToStorage(){
 		var to_push = {}
