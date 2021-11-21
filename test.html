@@ -45,7 +45,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.36</h1>
+				<h1>Delivery Date Settings V3.38</h1>
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
 					<p>Updates an order's delivery date given order number</p>
@@ -107,6 +107,38 @@
 						</tr>
 					</table>
 				</div>
+				
+				<h3>Inventory</h3>
+
+				<div class="form-area__content">
+					<p>Use to control sellable quantity at a given date</p>
+					<table id="inventory-table">
+						<tr>
+						<th>Sell Date </th>
+						<th>Epoch</th>
+						<th>Product Name</th>
+						<th></th>
+						<th></th>
+						</tr>
+					</table>
+					<br><br>
+					<div class="fieldsets-batch">
+						<div class="fieldset">
+							<div class="field field--medium">
+								<label class="field__label">Date</label>
+								<input id="inventory_date" type="text" class="field__input" tabindex="4" maxlength="64">
+								<div class="field__placeholder">Date</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="form-area__action">
+					<button type="button" onclick="onInvAddClick()" class="btn btn-primary btn-medium">Add</button>
+				</div>
+				
+				
+				
 				<h5>Log:</h5>
 				<div>
 				<p style="word-break: break-all; white-space: normal;" id="krstest"></p>
@@ -133,6 +165,9 @@
 			
 		});
 	});
+	function getIdFromSkuButton(var button){
+		button.attr('id').substring(12)
+	}
 	function populateSkuTable(){
 		var xhttp = new XMLHttpRequest();
 		var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/products?token="+accessToken
@@ -153,23 +188,20 @@
 					$button = $('<button style="margin-left:30px;" id="skucheckbox-' + products.items[i].id + '">');
 					$button.addClass('skucheckbox');
 					$button.addClass('btn btn-default');
-					$button.text('Unregistered');
+					$button.text(products.items[i].name);
 					$button.click(function() {
 						if ($(this).hasClass('btn-default')){
 							$(this).removeClass('btn-default');
 							$(this).addClass('btn-success');
-							$(this).text('Registered');
 						}
 						else{
 							$(this).removeClass('btn-success');
 							$(this).addClass('btn-default');
-							$(this).text('Unregistered');
 						}
 						pushToStorage();
 					    });
 					$tr = $('<tr>').append(
 							$('<td>').text(products.items[i].id),
-							$('<td>').text(products.items[i].name),
 							$('<td>').append($button));
 					$tr.appendTo('#sku-table');	
 				}
@@ -183,12 +215,9 @@
 		if ('sku' in parsed_data){
 			parsed_data = parsed_data.sku;
 			for (var i = 0; i < parsed_data.length; i++) { 
-
 				var id_str = "#skucheckbox-" + parsed_data[i] ;
-				krslog(id_str);
 				$(id_str).removeClass('btn-default');
 				$(id_str).addClass('btn-success');
-				$(id_str).text('Registered');
 
 			}
 		}
@@ -236,13 +265,43 @@
 	}
 	function addInventoryDate(date){
 		if (date){
-			
+			EcwidApp.getAppPublicConfig(function(data) {
+				publicData = data;
+				krslog("EcwidApp.getAppPublicConfig Success");
+				krslog(publicData);
+				var parsed_data = JSON.parse(data);
+				if ('sku' in parsed_data){
+					parsed_data = parsed_data.sku;
+					for (var i = 0; i < parsed_data.length; i++) { 
+						
+						var id_str = "#skucheckbox-" + parsed_data[i] ;
+						
+						var epoch = date.getTime();
+						$button = $('<button style="margin-left:30px;">');
+						$button.addClass('btn btn-default btn--destructive');
+						$button.text("Delete");
+						$button.click(function(){
+							$(this).parent().parent().remove();
+							pushToStorage();
+						});
+
+						var $tr = $('<tr>').append(
+							$('<td>').text(date.toLocaleDateString()),
+							$('<td>').text(epoch),
+							$('<td>').text($(id_str).text()),
+							$('<td>').text(''),
+							$('<td>').append($button));
+						$tr.appendTo('#blockout-table');
+					}
+				}
+			});
+
 		}
 	}
 	function onInvAddClick(){
 		var val = $("#inventory_date").datepicker('getDate');
 		addInventoryDate(val);
-		//pushToStorage();
+		pushToStorage();
 	
 	}
 	function pushToStorage(){
@@ -254,7 +313,7 @@
 		var list_of_sku = [];
 		$('.skucheckbox').each(function() {		
 			if ($(this).hasClass('btn-success')){
-			    list_of_sku.push($(this).attr('id').substring(12));
+			    list_of_sku.push(getIdFromSkuButton($(this));
 			}
 		});
 		
