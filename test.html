@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.47</h1>
+				<h1>Delivery Date Settings V3.48</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -167,7 +167,7 @@
 		});
 	});
 	function getIdFromSkuButton(button){
-		button.attr('id').substring(12)
+		return button.attr('id').substring(12)
 	}
 	function getEpochFromInvInput(input){
 		return input.attr('id').split("-")[1];
