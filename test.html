@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.64</h1>
+				<h1>Delivery Date Settings V3.65</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -410,9 +410,12 @@
 					}
 				}
 				pushToStorage();
+				loadInvSold();
 			});
-
+			
 		}
+		
+		
 	}
 	function pushToStorage(){
 		var to_push = {}
@@ -432,7 +435,7 @@
 			var pid = getPidFromInvInput($(this));
 			var qty = $(this).val();
 			list_of_inv.push({'epoch':epoch,
-					  'pic':pid,
+					  'pid':pid,
 					  'qty':qty});
 		});
 		
