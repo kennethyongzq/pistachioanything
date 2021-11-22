@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.53</h1>
+				<h1>Delivery Date Settings V3.54</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -220,7 +220,7 @@
 	}
 	function loadInvSold(){
 		var xhttp = new XMLHttpRequest();
-		var requestURL = https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=AWAITING_PROCESSING"
+		var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=AWAITING_PROCESSING"
 		var dict = {}
 		krslog("GET:requestURL:" + requestURL);
 		xhttp.open("GET", requestURL, true);
@@ -235,7 +235,7 @@
 				var orders = JSON.parse(apiResponse);
 				krslog("Success: GET success (" + orders.count + " / " + orders.total + ")");				
 				var xhttp = new XMLHttpRequest();
-				var requestURL = https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=PROCESSING"
+				var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=PROCESSING"
 
 				krslog("GET:requestURL:" + requestURL);
 				xhttp.open("GET", requestURL, true);
