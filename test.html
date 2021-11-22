@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.54</h1>
+				<h1>Delivery Date Settings V3.55</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -256,10 +256,10 @@
 							var epoch = date.getTime();
 							for(var j = 0 ; j < orders.items[i].items.length; j++){
 								var pid = orders.items[i].items[j].productId;
-								if !(epoch in dict){
+								if (!(epoch in dict)){
 									dict[epoch] = {}	
 								}
-								if !(pid in dict[epoch]){
+								if (!(pid in dict[epoch])){
 									dict[epoch][pid]= 0	
 								}
 								dict[epoch][pid] += orders.items[i].items[j].quantity 
