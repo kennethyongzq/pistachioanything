@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.50</h1>
+				<h1>Delivery Date Settings V3.51</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -119,7 +119,8 @@
 						<th>Sell Date </th>
 						<th>Epoch</th>
 						<th>Product Name</th>
-						<th></th>
+						<th>Inv</th>
+						<th>Sold</th>
 						<th></th>
 						</tr>
 					</table>
@@ -175,7 +176,11 @@
 	function getPidFromInvInput(input){
 		return input.attr('id').split("-")[2];
 	}
+	function getSoldFromPid(pid){
+		
+	}
 	function addInvItem(epoch, id, qty){
+		krslog("addInvItem");
 		var id_str = "#skucheckbox-" + id ;
 		$button = $('<button style="margin-left:30px;">');
 		$button.addClass('btn btn-default btn--destructive');
@@ -186,7 +191,8 @@
 		});
 		$input = $('<input id="invinput-'+epoch+'-'+id+'" type="number" class="field__input invinput" maxlength="10">');
 		$input.val(qty);
-
+		var date = new Date();
+		date.setTime(epoch);
 		var $tr = $('<tr>').append(
 			$('<td>').text(date.toLocaleDateString()),
 			$('<td>').text(epoch),
