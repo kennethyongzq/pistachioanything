@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.55</h1>
+				<h1>Delivery Date Settings V3.56</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -234,20 +234,20 @@
 				var apiResponse = xhttp.responseText;
 				var orders = JSON.parse(apiResponse);
 				krslog("Success: GET success (" + orders.count + " / " + orders.total + ")");				
-				var xhttp = new XMLHttpRequest();
-				var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=PROCESSING"
+				var xhttp2 = new XMLHttpRequest();
+				var requestURL2 = "https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=PROCESSING"
 
-				krslog("GET:requestURL:" + requestURL);
-				xhttp.open("GET", requestURL, true);
-				xhttp.send();
+				krslog("GET:requestURL:" + requestURL2);
+				xhttp2.open("GET", requestURL2, true);
+				xhttp2.send();
 
-				xhttp.onreadystatechange = function() {
+				xhttp2.onreadystatechange = function() {
 
 					krslog("xhttp.readyState = " + xhttp.readyState);
 					krslog("xhttp.status = " + xhttp.status);
-					if (xhttp.readyState == 4 && xhttp.status == 200) {
-						var apiResponse2 = xhttp.responseText;
-						var orders2 = JSON.parse(apiResponse);
+					if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+						var apiResponse2 = xhttp2.responseText;
+						var orders2 = JSON.parse(apiResponse2);
 						krslog("Success: GET success (" + orders2.count + " / " + orders2.total + ")");		
 						
 						for (var i = 0 ; i < orders.items.length ; i ++){
