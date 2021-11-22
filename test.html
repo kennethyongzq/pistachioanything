@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.63</h1>
+				<h1>Delivery Date Settings V3.64</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -250,51 +250,37 @@
 						var apiResponse2 = xhttp2.responseText;
 						var orders2 = JSON.parse(apiResponse2);
 						krslog("Success: GET success (" + orders2.count + " / " + orders2.total + ")");		
-						
-						for (var i = 0 ; i < orders.items.length ; i ++){
+						orders_arr =[orders,orders2];
+						for (var h = 0 ; h < orders_arr.length ; h++){
+							for (var i = 0 ; i < orders_arr[h].items.length ; i ++){
 
-							if (typeof orders.items[i].extraFields.ecwid_order_delivery_time_interval_end !== 'undefined'){
-								krslog("Delivery");
-								krslog(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
-								var date = new Date(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
-							}
-							else{
-								krslog("Self Collect");
-								krslog(orders.items[i].pickupTime);
-								var date = new Date(orders.items[i].pickupTime);
-							}
-							date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
-							var epoch = date.getTime();
-							krslog(epoch);
-							for(var j = 0 ; j < orders.items[i].items.length; j++){
-								var pid = orders.items[i].items[j].productId;
-								krslog(pid);
-								if (!(epoch in dict)){
-									dict[epoch] = {}	
+								if (typeof  orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end !== 'undefined'){
+									krslog("Delivery");
+									krslog( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
+									var date = new Date( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
 								}
-								if (!(pid in dict[epoch])){
-									dict[epoch][pid]= 0	
+								else{
+									krslog("Self Collect");
+									krslog( orders_arr[h].items[i].pickupTime);
+									var date = new Date( orders_arr[h].items[i].pickupTime);
 								}
-								dict[epoch][pid] += orders.items[i].items[j].quantity 
-							}
-						}
-						for (var i = 0 ; i < orders2.items.length ; i ++){
-							krslog(orders2.items[i].extraFields.ecwid_order_delivery_time_interval_end);
-							var date = new Date(orders2.items[i].extraFields.ecwid_order_delivery_time_interval_end);
-							date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
-							var epoch = date.getTime();
-							krslog(epoch);
-							for(var j = 0 ; j < orders2.items[i].items.length; j++){
-								var pid = orders2.items[i].items[j].productId;
-								if (!(epoch in dict)){
-									dict[epoch] = {}	
+								date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
+								var epoch = date.getTime();
+								krslog(epoch);
+								for(var j = 0 ; j <  orders_arr[h].items[i].items.length; j++){
+									var pid =  orders_arr[h].items[i].items[j].productId;
+									krslog(pid);
+									if (!(epoch in dict)){
+										dict[epoch] = {}	
+									}
+									if (!(pid in dict[epoch])){
+										dict[epoch][pid]= 0	
+									}
+									dict[epoch][pid] +=  orders_arr[h].items[i].items[j].quantity 
 								}
-								if (!(pid in dict[epoch])){
-									dict[epoch][pid]= 0	
-								}
-								dict[epoch][pid] += orders2.items[i].items[j].quantity 
 							}
 						}
+						
 						krslog(JSON.stringify(dict));
 						$('.invsold').each(function() {		
 							var epoch = getEpochFromInvSold($(this));
