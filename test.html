@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.51</h1>
+				<h1>Delivery Date Settings V3.52</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -191,13 +191,16 @@
 		});
 		$input = $('<input id="invinput-'+epoch+'-'+id+'" type="number" class="field__input invinput" maxlength="10">');
 		$input.val(qty);
+		$input.on('input',function(e){
+		    pushToStorage();
+		});
 		var date = new Date();
 		date.setTime(epoch);
 		var $tr = $('<tr>').append(
 			$('<td>').text(date.toLocaleDateString()),
 			$('<td>').text(epoch),
 			$('<td>').text($(id_str).text()),
-			$('<td>').text($input),
+			$('<td>').append($input),
 			$('<td>').append($button));
 		$tr.appendTo('#inventory-table');	
 	}
