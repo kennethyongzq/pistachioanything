@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.56</h1>
+				<h1>Delivery Date Settings V3.57</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -251,9 +251,11 @@
 						krslog("Success: GET success (" + orders2.count + " / " + orders2.total + ")");		
 						
 						for (var i = 0 ; i < orders.items.length ; i ++){
-							var date = Date.parse(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
+							krslog(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
+							var date = new Date(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end));
 							date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
 							var epoch = date.getTime();
+							krslog(epoch);
 							for(var j = 0 ; j < orders.items[i].items.length; j++){
 								var pid = orders.items[i].items[j].productId;
 								if (!(epoch in dict)){
