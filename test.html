@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.62</h1>
+				<h1>Delivery Date Settings V3.63</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -268,6 +268,7 @@
 							krslog(epoch);
 							for(var j = 0 ; j < orders.items[i].items.length; j++){
 								var pid = orders.items[i].items[j].productId;
+								krslog(pid);
 								if (!(epoch in dict)){
 									dict[epoch] = {}	
 								}
