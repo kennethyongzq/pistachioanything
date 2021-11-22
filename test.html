@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.61</h1>
+				<h1>Delivery Date Settings V3.62</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -278,20 +278,20 @@
 							}
 						}
 						for (var i = 0 ; i < orders2.items.length ; i ++){
-							krslog(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
-							var date = new Date(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
+							krslog(orders2.items[i].extraFields.ecwid_order_delivery_time_interval_end);
+							var date = new Date(orders2.items[i].extraFields.ecwid_order_delivery_time_interval_end);
 							date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
 							var epoch = date.getTime();
 							krslog(epoch);
-							for(var j = 0 ; j < orders.items[i].items.length; j++){
-								var pid = orders.items[i].items[j].productId;
+							for(var j = 0 ; j < orders2.items[i].items.length; j++){
+								var pid = orders2.items[i].items[j].productId;
 								if (!(epoch in dict)){
 									dict[epoch] = {}	
 								}
 								if (!(pid in dict[epoch])){
 									dict[epoch][pid]= 0	
 								}
-								dict[epoch][pid] += orders.items[i].items[j].quantity 
+								dict[epoch][pid] += orders2.items[i].items[j].quantity 
 							}
 						}
 						krslog(JSON.stringify(dict));
