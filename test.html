@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.52</h1>
+				<h1>Delivery Date Settings V3.53</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -176,8 +176,11 @@
 	function getPidFromInvInput(input){
 		return input.attr('id').split("-")[2];
 	}
-	function getSoldFromPid(pid){
-		
+	function getEpochFromInvSold(p){
+		return p.attr('id').split("-")[1];
+	}
+	function getPidFromInvSold(p){
+		return p.attr('id').split("-")[2];
 	}
 	function addInvItem(epoch, id, qty){
 		krslog("addInvItem");
@@ -194,6 +197,7 @@
 		$input.on('input',function(e){
 		    pushToStorage();
 		});
+		$p = $('<p id="invsold-'+epoch+'-'+id+'" type="number" class="field__input invinput" maxlength="10">');
 		var date = new Date();
 		date.setTime(epoch);
 		var $tr = $('<tr>').append(
@@ -201,6 +205,7 @@
 			$('<td>').text(epoch),
 			$('<td>').text($(id_str).text()),
 			$('<td>').append($input),
+			$('<td>').append($p),
 			$('<td>').append($button));
 		$tr.appendTo('#inventory-table');	
 	}
@@ -212,6 +217,62 @@
 				addInvItem(parsed_data[i].epoch,parsed_data[i].pid,parsed_data[i].qty);
 			}
 		}
+	}
+	function loadInvSold(){
+		var xhttp = new XMLHttpRequest();
+		var requestURL = https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=AWAITING_PROCESSING"
+		var dict = {}
+		krslog("GET:requestURL:" + requestURL);
+		xhttp.open("GET", requestURL, true);
+		xhttp.send();
+
+		xhttp.onreadystatechange = function() {
+
+			krslog("xhttp.readyState = " + xhttp.readyState);
+			krslog("xhttp.status = " + xhttp.status);
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				var apiResponse = xhttp.responseText;
+				var orders = JSON.parse(apiResponse);
+				krslog("Success: GET success (" + orders.count + " / " + orders.total + ")");				
+				var xhttp = new XMLHttpRequest();
+				var requestURL = https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=PROCESSING"
+
+				krslog("GET:requestURL:" + requestURL);
+				xhttp.open("GET", requestURL, true);
+				xhttp.send();
+
+				xhttp.onreadystatechange = function() {
+
+					krslog("xhttp.readyState = " + xhttp.readyState);
+					krslog("xhttp.status = " + xhttp.status);
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						var apiResponse2 = xhttp.responseText;
+						var orders2 = JSON.parse(apiResponse);
+						krslog("Success: GET success (" + orders2.count + " / " + orders2.total + ")");		
+						
+						for (var i = 0 ; i < orders.items.length ; i ++){
+							var date = Date.parse(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
+							date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
+							var epoch = date.getTime();
+							for(var j = 0 ; j < orders.items[i].items.length; j++){
+								var pid = orders.items[i].items[j].productId;
+								if !(epoch in dict){
+									dict[epoch] = {}	
+								}
+								if !(pid in dict[epoch]){
+									dict[epoch][pid]= 0	
+								}
+								dict[epoch][pid] += orders.items[i].items[j].quantity 
+							}
+						}
+						krslog(JSON.stringify(dict));
+					}
+				}
+			}
+		}
+
+				
+			
 	}
 	function loadSkuTable(){
 		var xhttp = new XMLHttpRequest();
@@ -252,6 +313,7 @@
 				}
 				loadSKU();
 				loadInvTable();
+				loadInvSold();
 			}
 		};	
 	}
