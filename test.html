@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.59</h1>
+				<h1>Delivery Date Settings V3.61</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -198,6 +198,7 @@
 		    pushToStorage();
 		});
 		$p = $('<p id="invsold-'+epoch+'-'+id+'" type="number" class="field__input invinput" maxlength="10">');
+		$p.text(0);
 		var date = new Date();
 		date.setTime(epoch);
 		var $tr = $('<tr>').append(
@@ -251,6 +252,32 @@
 						krslog("Success: GET success (" + orders2.count + " / " + orders2.total + ")");		
 						
 						for (var i = 0 ; i < orders.items.length ; i ++){
+
+							if (typeof orders.items[i].extraFields.ecwid_order_delivery_time_interval_end !== 'undefined'){
+								krslog("Delivery");
+								krslog(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
+								var date = new Date(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
+							}
+							else{
+								krslog("Self Collect");
+								krslog(orders.items[i].pickupTime);
+								var date = new Date(orders.items[i].pickupTime);
+							}
+							date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
+							var epoch = date.getTime();
+							krslog(epoch);
+							for(var j = 0 ; j < orders.items[i].items.length; j++){
+								var pid = orders.items[i].items[j].productId;
+								if (!(epoch in dict)){
+									dict[epoch] = {}	
+								}
+								if (!(pid in dict[epoch])){
+									dict[epoch][pid]= 0	
+								}
+								dict[epoch][pid] += orders.items[i].items[j].quantity 
+							}
+						}
+						for (var i = 0 ; i < orders2.items.length ; i ++){
 							krslog(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
 							var date = new Date(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
 							date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
