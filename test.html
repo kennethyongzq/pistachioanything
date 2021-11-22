@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.58</h1>
+				<h1>Delivery Date Settings V3.59</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -252,7 +252,7 @@
 						
 						for (var i = 0 ; i < orders.items.length ; i ++){
 							krslog(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
-							var date = new Date(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end));
+							var date = new Date(orders.items[i].extraFields.ecwid_order_delivery_time_interval_end);
 							date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
 							var epoch = date.getTime();
 							krslog(epoch);
@@ -271,7 +271,7 @@
 						$('.invsold').each(function() {		
 							var epoch = getEpochFromInvSold($(this));
 							var pid = getPidFromInvSold($(this));
-							$(this).val(dict[epoch][pid]);
+							$(this).text(dict[epoch][pid]);
 							
 						});
 					}
