@@ -1,6 +1,6 @@
 function update_blockout_dates(){
     console.log("update_blockout_dates");
-    console.log("Version 3.1");
+    console.log("Version 3.2");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -46,7 +46,7 @@ function convertCartToPidQtyDict(cart){
     for (var i = 0 ; i < cart.items.length ; i++){
         var item = cart.items[i];
         var qty = item.quantity;
-        var pid = item.product.sku;
+        var pid = item.product.id;
         if (!(pid in dict)){
             dict[pid] = 0
         }
