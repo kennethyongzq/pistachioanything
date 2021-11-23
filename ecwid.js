@@ -1,6 +1,6 @@
 function update_blockout_dates(cart_dict){
     console.log("update_blockout_dates");
-    console.log("Version 3.4");
+    console.log("Version 3.5");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -8,7 +8,7 @@ function update_blockout_dates(cart_dict){
     console.log(data);
 
     // Processing cart products to see if need to block out any epochs
-    var inv_data = data.inv;
+    var inv_data = data['inv'];
     var list_of_epochs = [];
     Object.keys(cart_dict).forEach(function(key) {
         console.log(key, cart_dict[key]);
