@@ -1,6 +1,6 @@
 function update_blockout_dates(cart_dict){
     console.log("update_blockout_dates");
-    console.log("Version 3.5");
+    console.log("Version 3.6");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -15,9 +15,9 @@ function update_blockout_dates(cart_dict){
         var c_pid = key;
         var c_qty = cart_dict[key];
         for (var j = 0 ; j < inv_data.length ; j++){
-            var i_epoch = inv_data[j].epoch;
-            var i_pid = inv_data[j].pid;
-            var i_qty = inv_data[j].qty;
+            var i_epoch = inv_data[j]['epoch'];
+            var i_pid = inv_data[j]['pid'];
+            var i_qty = inv_data[j]['qty'];
 
             if (i_pid == c_pid){
                 console.log("There exist an item in cart that has inventory data");
