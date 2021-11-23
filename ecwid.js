@@ -1,6 +1,6 @@
 function update_blockout_dates(){
     console.log("update_blockout_dates");
-    console.log("Version 2 : 29 NOV 2021 v2");
+    console.log("Version 3.1");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
@@ -40,8 +40,25 @@ function update_blockout_dates(){
 
     Ecwid.refreshConfig();        
 }
+function convertCartToPidQtyDict(cart){
+    console.log("convertCartToPidQtyDict");
+    var dict = {}
+    for (var i = 0 ; i < cart.items.length ; i++){
+        var item = cart.items[i];
+        var qty = item.quantity;
+        var pid = item.product.sku;
+        if (!(pid in dict)){
+            dict[pid] = 0
+        }
+        dict[pid] += qty;
+    }
+    console.log(dict);
+    return dict;
+}
 
 Ecwid.OnCartChanged.add(function(cart){
+    console.log("OnCartChanged");
+    var dict = convertCartToPidQtyDict(cart);
     update_blockout_dates();
 });
 
@@ -52,7 +69,11 @@ Ecwid.OnPageLoad.add(function(page) {
 
 Ecwid.OnPageLoaded.add(function(page) {
     console.log("OnPageLoaded");
-    update_blockout_dates();    
+    Ecwid.Cart.get(function(cart){
+        var dict = convertCartToPidQtyDict(cart);
+        update_blockout_dates();    
+    });
+
     
 });
 
