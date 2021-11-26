@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3.66</h1>
+				<h1>Delivery Date Settings V3</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -109,7 +109,7 @@
 						</tr>
 					</table>
 				</div>
-				
+<!-- uncomment to load inventory code components
 				<h3>Inventory</h3>
 
 				<div class="form-area__content">
@@ -140,7 +140,7 @@
 					<button type="button" onclick="onInvAddClick()" class="btn btn-primary btn-medium">Add</button>
 				</div>
 				
-				
+				-->
 				
 				<h5>Log:</h5>
 				<div>
@@ -157,13 +157,15 @@
 	$(document).ready(function(){
 		$( "#order_date" ).datepicker({dateFormat: "dd M yy"});
 		$( "#blockout_date" ).datepicker({dateFormat: "dd M yy"});
-		$( "#inventory_date" ).datepicker({dateFormat: "dd M yy"});
+
+		//$( "#inventory_date" ).datepicker({dateFormat: "dd M yy"});
 
 		EcwidApp.getAppPublicConfig(function(data) {
 			publicData = data;
 			krslog("EcwidApp.getAppPublicConfig Success");
 			krslog(publicData);
-			loadSkuTable();	
+			// uncomment to load inventory code components
+			//loadSkuTable();	
 			loadBlockoutDates();
 		});
 	});
@@ -252,7 +254,7 @@
 						krslog("Success: GET success (" + orders2.count + " / " + orders2.total + ")");		
 						orders_arr =[orders,orders2];
 						for (var h = 0 ; h < orders_arr.length ; h++){
-							for (var i = 0 ; i < orders_arr[h].items.length ; i ++){
+							for (var i = 0 ; i < orders_arr[h].items.length ; i++){
 
 								if (typeof orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end !== 'undefined'){
 									krslog("Delivery");
