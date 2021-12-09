@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V3</h1>
+				<h1>Delivery Date Settings V4.1</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -72,7 +72,7 @@
 				<div class="form-area__action">
 					<button type="button" onclick="onSaveClick()" class="btn btn-primary btn-medium">Save</button>
 				</div>
-				<h3>Add Blockout Date</h3>
+				<h3>Add Blockout Date (Delivery)</h3>
 
 				<div class="form-area__content">
 					<p>Blocks out delivery dates from storefront</p>
@@ -97,6 +97,34 @@
 				</div>
 				<div class="form-area__action">
 					<button type="button" onclick="onAddClick()" class="btn btn-primary btn-medium">Add</button>
+				</div>
+				
+				
+				<h3>Add Blockout Date (Self Collect)</h3>
+
+				<div class="form-area__content">
+					<p>Blocks out delivery dates from storefront</p>
+					<table id="blockoutsc-table">
+						<tr>
+						<th>Blockout Date </th>
+							<th>Epoch</th>
+						<th></th>
+						</tr>
+					</table>
+					<br><br>
+					<div class="fieldsets-batch">
+						<div class="fieldset">
+							<div class="field field--medium">
+								<label class="field__label">Date</label>
+								<input id="blockoutsc_date" type="text" class="field__input" tabindex="4" maxlength="64">
+								<div class="field__placeholder">Date</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="form-area__action">
+					<button type="button" onclick="onAddScClick()" class="btn btn-primary btn-medium">Add</button>
 				</div>
 				<!-- uncomment to load inventory code components
 				<h3>Inventorisable Products</h3>
@@ -368,6 +396,17 @@
 			}
 		}
 	}
+	function loadBlockoutScDates(){
+		var parsed_data = JSON.parse(publicData);
+		if ('blockoutsc_dates' in parsed_data){
+			parsed_data = parsed_data.blockoutsc_dates;
+			for (var i = 0; i < parsed_data.length; i++) { 
+			var date = new Date();
+			date.setTime(parsed_data[i]);
+			addBlockoutScDate(date);
+			}
+		}
+	}
 	function krslog(text){
 	        $("#krstest").append("<br />" + text);
 	}
@@ -390,9 +429,36 @@
 			$tr.appendTo('#blockout-table');
 		}
 	}
+	
+	function addBlockoutScDate(date){
+		
+		if (date){
+			var epoch = date.getTime();
+			$button = $('<button style="margin-left:30px;">');
+			$button.addClass('btn btn-default btn--destructive');
+			$button.text("Delete");
+			$button.click(function(){
+				$(this).parent().parent().remove();
+				pushToStorage();
+			});
+
+			var $tr = $('<tr>').append(
+				$('<td>').text(date.toLocaleDateString()),
+				$('<td class="blockoutscdate">').text(epoch),
+				$('<td>').append($button));
+			$tr.appendTo('#blockoutsc-table');
+		}
+	}
 	function onAddClick(){
 		var val = $("#blockout_date").datepicker('getDate');
 		addBlockoutDate(val);
+		pushToStorage();
+	
+	}
+	
+	function onAddScClick(){
+		var val = $("#blockoutsc_date").datepicker('getDate');
+		addBlockoutScDate(val);
 		pushToStorage();
 	
 	}
@@ -426,6 +492,11 @@
 		$('.blockoutdate').each(function() {		
 		    list_of_dates.push($(this).text());
 		});
+		
+		var list_of_scdates = [];
+		$('.blockoutscdate').each(function() {		
+		    list_of_scdates.push($(this).text());
+		});
 		var list_of_sku = [];
 		$('.skucheckbox').each(function() {		
 			if ($(this).hasClass('btn-success')){
@@ -443,6 +514,7 @@
 		});
 		
 		to_push['blockout_dates'] = list_of_dates;
+		to_push['blockoutsc_dates'] = list_of_scdates;
 		to_push['sku'] = list_of_sku;
 		to_push['inv'] = list_of_inv;
 		var json_str = JSON.stringify(to_push);
