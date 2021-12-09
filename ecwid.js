@@ -1,12 +1,14 @@
 function update_blockout_dates(cart_dict){
     console.log("update_blockout_dates");
-    console.log("Version 3.9");
+    console.log("Version 4.0");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
     data = data['blockout_dates'];
     data2 = data['blockoutsc_dates'];
+    console.log('blockout_dates');
     console.log(data);
+    console.log('blockoutsc_dates');
     console.log(data2);
 
     // Processing cart products to see if need to block out any epochs
