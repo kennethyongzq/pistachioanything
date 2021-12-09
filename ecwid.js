@@ -5,7 +5,9 @@ function update_blockout_dates(cart_dict){
     console.log(data);
     data = JSON.parse(data)
     data = data['blockout_dates'];
+    data2 = data['blockout_scdates'];
     console.log(data);
+    console.log(data2);
 
     // Processing cart products to see if need to block out any epochs
     /*
@@ -46,9 +48,9 @@ function update_blockout_dates(cart_dict){
         }
     }
     for (var i = 0; i < ec.order.extraFields.ecwid_order_pickup_time.overrides.length; i++) {
-        for (var j = 0; j < data.length; j++) {
+        for (var j = 0; j < data2.length; j++) {
             var blockout_date = new Date();
-            blockout_date.setTime(data[j]);
+            blockout_date.setTime(data2[j]);
             var array_to_append = new Array(blockout_date.getFullYear() + "-" + String(blockout_date.getMonth()+1).padStart(2, '0') + "-" + String(blockout_date.getDate()).padStart(2, '0') + " 00:00:00", blockout_date.getFullYear() + "-" + String(blockout_date.getMonth()+1).padStart(2, '0') + "-" + String(blockout_date.getDate()).padStart(2, '0') + " 23:59:59");
             ec.order.extraFields.ecwid_order_pickup_time.overrides[i].fieldsToOverride.datePickerOptions.disallowDates.push(array_to_append);
         }
