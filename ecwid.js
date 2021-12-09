@@ -1,11 +1,11 @@
 function update_blockout_dates(cart_dict){
     console.log("update_blockout_dates");
-    console.log("Version 3.8");
+    console.log("Version 3.9");
     var data = Ecwid.getAppPublicConfig('custom-app-33883008-3');
     console.log(data);
     data = JSON.parse(data)
     data = data['blockout_dates'];
-    data2 = data['blockout_scdates'];
+    data2 = data['blockoutsc_dates'];
     console.log(data);
     console.log(data2);
 
