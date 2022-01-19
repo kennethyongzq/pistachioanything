@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.4</h1>
+				<h1>Delivery Date Settings V4.51</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -126,6 +126,14 @@
 				<div class="form-area__action">
 					<button type="button" onclick="onAddScClick()" class="btn btn-primary btn-medium">Add</button>
 				</div>
+				
+				<h3>SKU Sold</h3>
+
+				<div class="form-area__content">
+					<table id="sku-sold-table">
+					</table>
+				</div>
+				
 				<!-- uncomment to load inventory code components
 				<h3>Inventorisable Products</h3>
 				<div class="form-area__content">
@@ -198,6 +206,7 @@
 			//loadSkuTable();	
 			loadBlockoutDates();	
 			loadBlockoutScDates();
+			loadSkuSoldTable();
 		});
 	});
 	function getIdFromSkuButton(button){
@@ -249,6 +258,83 @@
 			parsed_data = parsed_data.inv;
 			for (var i = 0; i < parsed_data.length; i++) { 
 				addInvItem(parsed_data[i].epoch,parsed_data[i].pid,parsed_data[i].qty);
+			}
+		}
+	}
+	function loadSkuSoldTable(){
+		// Loads SKU Sold at given date 
+		var xhttp = new XMLHttpRequest();
+		var requestURL = "https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=AWAITING_PROCESSING"
+		var dict_of_epoch_to_pid = {}
+		var list_of_name = [];
+		krslog("GET:requestURL:" + requestURL);
+		xhttp.open("GET", requestURL, true);
+		xhttp.send();
+
+		xhttp.onreadystatechange = function() {
+
+			krslog("xhttp.readyState = " + xhttp.readyState);
+			krslog("xhttp.status = " + xhttp.status);
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				var apiResponse = xhttp.responseText;
+				var orders = JSON.parse(apiResponse);
+				krslog("Success: GET success (" + orders.count + " / " + orders.total + ")");				
+				var xhttp2 = new XMLHttpRequest();
+				var requestURL2 = "https://app.ecwid.com/api/v3/"+storeId+"/orders?token="+accessToken+"&fulfillmentStatus=PROCESSING"
+
+				krslog("GET:requestURL:" + requestURL2);
+				xhttp2.open("GET", requestURL2, true);
+				xhttp2.send();
+
+				xhttp2.onreadystatechange = function() {
+
+					krslog("xhttp.readyState = " + xhttp.readyState);
+					krslog("xhttp.status = " + xhttp.status);
+					if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+						var apiResponse2 = xhttp2.responseText;
+						var orders2 = JSON.parse(apiResponse2);
+						krslog("Success: GET success (" + orders2.count + " / " + orders2.total + ")");		
+						orders_arr =[orders,orders2];
+
+						
+					
+						for (var h = 0 ; h < orders_arr.length ; h++){
+							for (var i = 0 ; i < orders_arr[h].items.length ; i++){
+
+								if (typeof orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end !== 'undefined'){
+									krslog("Delivery");
+									krslog( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
+									var date = new Date( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
+								}
+								else{
+									krslog("Self Collect");
+									krslog( orders_arr[h].items[i].pickupTime);
+									var date = new Date( orders_arr[h].items[i].pickupTime);
+								}
+								date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
+								var epoch = date.getTime();
+								krslog(epoch);
+								for(var j = 0 ; j <  orders_arr[h].items[i].items.length; j++){
+									var name =  orders_arr[h].items[i].items[j].name;
+									krslog(name);
+									if (!(name in list_of_name)){
+										list_of_name.push(name);
+									}		
+									if (!(epoch in dict_of_epoch_to_pid)){
+										dict_of_epoch_to_pid[epoch] = {}	
+									}
+									if (!(name in dict_of_epoch_to_pid[epoch])){
+										dict_of_epoch_to_pid[epoch][name]= 0	
+									}
+									dict_of_epoch_to_pid[epoch][name] +=  orders_arr[h].items[i].items[j].quantity 
+								}
+							}
+						}
+						
+						krslog(JSON.stringify(dict_of_epoch_to_pid));
+						
+					}
+				}
 			}
 		}
 	}
