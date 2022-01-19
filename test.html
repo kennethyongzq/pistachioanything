@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.51</h1>
+				<h1>Delivery Date Settings V4.52</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -332,6 +332,17 @@
 						}
 						
 						krslog(JSON.stringify(dict_of_epoch_to_pid));
+						// Setup headers
+						var $tr = $('<tr>').append($('<th>').text("Product"));
+						Object.keys(dict_of_epoch_to_pid).forEach(function(key) {
+							var date = new Date();
+							// key is epoch
+							date.setTime(key);
+							$tr.append($('<th>').text(date.toLocaleDateString());
+						});
+						$tr.appendTo('#sku-sold-table');
+
+
 						
 					}
 				}
