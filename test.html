@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.53</h1>
+				<h1>Delivery Date Settings V4.54</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -346,8 +346,15 @@
 							var name = list_of_names[h];
 							var $tr = $('<tr>').append($('<th>').text(name));
 							Object.keys(dict_of_epoch_to_pid).forEach(function(key) {
+								if (name in dict_of_epoch_to_pid[key]){
+									$tr.append($('<td>').text(dict_of_epoch_to_pid[key][name]));
+								}
+								else{
+									$tr.append($('<td>').text(0));
+								}
 							
 							});
+							$tr.appendTo('#sku-sold-table');
 							
 						}
 						*/
