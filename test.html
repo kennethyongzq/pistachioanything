@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.6</h1>
+				<h1>Delivery Date Settings V4.7</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -128,7 +128,7 @@
 				</div>
 				
 				<h3>SKU Sold</h3>
-				<p> Tally of products ordered by date, only orders that are processing or awaiting processing are considered</p>
+				<p> Tally of products ordered by date, only orders that are <b>Processing</b> or <b>Awaiting Processing</b> are considered. Click on date button to go to Ecwid Sales Order page filtered to Pickup/Delivery date</p>
 				<div class="form-area__content">
 					<table id="sku-sold-table">
 					</table>
@@ -377,7 +377,7 @@
 						});
 						$tr.appendTo('#sku-sold-table');
 
-						var $tr = $('<tr>').append($('<th>').text("Day"));
+						var $tr = $('<tr>').append($('<th>').text(""));
 						Object.keys(sorted_dict_of_epoch_to_pid).forEach(function(key) {
 							var date = new Date();
 							// key is epoch
