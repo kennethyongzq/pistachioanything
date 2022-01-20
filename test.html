@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.516</h1>
+				<h1>Delivery Date Settings V4.518</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -302,14 +302,14 @@
 							for (var i = 0 ; i < orders_arr[h].items.length ; i++){
 
 								if (typeof orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end !== 'undefined'){
-									krslog("Delivery");
-									krslog( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
 									var date = new Date( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
 								}
-								else{
-									krslog("Self Collect");
-									krslog( orders_arr[h].items[i].pickupTime);
+								else if (typeof orders_arr[h].items[i].pickupTime !== 'undefined'){
 									var date = new Date( orders_arr[h].items[i].pickupTime);
+								}
+								else{
+									krslog("Order that is not delivery or self pickup, see console");	
+									console.log(orders_arr[h].items[i]);
 								}
 								date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
 								var epoch = date.getTime();
