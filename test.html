@@ -365,7 +365,7 @@
 						krslog(JSON.stringify(sorted_dict_of_epoch_to_pid));
 						// Setup headers
 						
-						var $tr = $('<tr>').append($('<th>').text("Product"));
+						var $tr = $('<tr>').append($('<th>').text(""));
 						Object.keys(sorted_dict_of_epoch_to_pid).forEach(function(key) {
 							var date = new Date();
 							// key is epoch
@@ -420,7 +420,7 @@
 						// Make Alt row blue
 						var h = 0;
 						$("#sku-sold-table tr").each(function() {
-							if(h % 2 == 0){
+							if(h % 2 == 0 && h > 1){
 								$(this).addClass('tablealtrow');
 							}
 							h++;
