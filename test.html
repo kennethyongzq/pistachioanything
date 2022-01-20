@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.59</h1>
+				<h1>Delivery Date Settings V4.511</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -330,12 +330,23 @@
 								}
 							}
 						}
-						
-						krslog(JSON.stringify(dict_of_epoch_to_pid));
+						// Sort dictionary
+						var keys = Object.keys(dict_of_epoch_to_pid); // or loop over the object to get the array
+						// keys will be in any order
+						keys.sort(); // maybe use custom sort, to change direction use .reverse()
+						// keys now will be in wanted order
+						var sorted_dict_of_epoch_to_pid = {}
+						for (var h=0; h<keys.length; h++) { // now lets iterate in sort order
+							var key = keys[h];
+						    	var value = dict_of_epoch_to_pid[key];
+						    	/* do something with key & value here */
+							sorted_dict_of_epoch_to_pid[key] = value;
+						} 
+						krslog(JSON.stringify(sorted_dict_of_epoch_to_pid));
 						// Setup headers
 						
 						var $tr = $('<tr>').append($('<th>').text("Product"));
-						Object.keys(dict_of_epoch_to_pid).forEach(function(key) {
+						Object.keys(sorted_dict_of_epoch_to_pid).forEach(function(key) {
 							var date = new Date();
 							// key is epoch
 							date.setTime(key);
@@ -347,11 +358,11 @@
 							var name = list_of_name[h];
 							krslog(name);
 							var $tr = $('<tr>').append($('<th>').text(name));
-							Object.keys(dict_of_epoch_to_pid).forEach(function(key) {
+							Object.keys(sorted_dict_of_epoch_to_pid).forEach(function(key) {
 								krslog(key);
-								if (name in dict_of_epoch_to_pid[key]){
+								if (name in sorted_dict_of_epoch_to_pid[key]){
 									krslog("Creating td with value");
-									$tr.append($('<td>').text(dict_of_epoch_to_pid[key][name]));
+									$tr.append($('<td>').text(sorted_dict_of_epoch_to_pid[key][name]));
 								}
 								else{
 									krslog("Creating td 0");
