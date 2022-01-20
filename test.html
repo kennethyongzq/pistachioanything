@@ -51,7 +51,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V5</h1>
+				<h1>Delivery Date Settings V5.1</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -315,6 +315,8 @@
 								}
 								else{
 									krslog("Order that is not delivery or self pickup, see console");	
+									var date = new Date();
+									date.setTime(0);
 									console.log(orders_arr[h].items[i]);
 								}
 								date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
@@ -379,7 +381,14 @@
 								})
 							$button = $('<button>');
 							$button.addClass('btn btn-default');
-							$button.text(date.toLocaleDateString());
+							if (key>0){
+								$button.text(date.toLocaleDateString());
+							}
+							else{
+								$button.text("No Date");
+								$button.attr('disabled','disabled');
+								
+							}
 							
 							$tr.append($('<th>').append($a.append($button)));
 
@@ -393,11 +402,13 @@
 							date.setTime(key);
 							var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 							var day_name = days[ date.getDay() ];
-							$tr.append($('<th>').text(day_name));
+							if (key>0){
+								$tr.append($('<th>').text(day_name));
+							}
+							else{
+								$tr.append($('<th>').text(""));
+							}
 						});
-						$tr.appendTo('#sku-sold-table');
-						
-						
 						$tr.appendTo('#sku-sold-table');
 						for(var h = 0 ; h <  list_of_name.length; h++){
 
