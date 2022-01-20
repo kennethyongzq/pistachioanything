@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.530</h1>
+				<h1>Delivery Date Settings V4.531</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -366,7 +366,7 @@
 							date.setTime(key);
 							$a = $('<a>',{
 								    target: '_blank',
-								    href: "https://my.ecwid.com/store/33883008#orders:count=100&shipping-from=" + date.getFullYear() + "-" +date.getMonth() + "-" + date.getDate() + "%2000:00:00&shipping-to=" + date.getFullYear() + "-" +date.getMonth() + "-" + date.getDate() + "%2023:59:00",
+								    href: "https://my.ecwid.com/store/33883008#orders:count=100&shipping-from=" + date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "%2000:00:00&shipping-to=" + date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + "%2023:59:00",
 								})
 							$button = $('<button>');
 							$button.addClass('btn btn-default');
