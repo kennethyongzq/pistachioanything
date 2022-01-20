@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.511</h1>
+				<h1>Delivery Date Settings V4.513</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -351,6 +351,17 @@
 							// key is epoch
 							date.setTime(key);
 							$tr.append($('<th>').text(date.toLocaleDateString()));
+						});
+						$tr.appendTo('#sku-sold-table');
+						
+						var $tr = $('<tr>').append($('<th>').text("Day"));
+						Object.keys(sorted_dict_of_epoch_to_pid).forEach(function(key) {
+							var date = new Date();
+							// key is epoch
+							date.setTime(key);
+							var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+							var day_name = days[ date.getDay() ];
+							$tr.append($('<th>').text(day_name));
 						});
 						$tr.appendTo('#sku-sold-table');
 						for(var h = 0 ; h <  list_of_name.length; h++){
