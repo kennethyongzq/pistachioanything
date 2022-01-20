@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.526</h1>
+				<h1>Delivery Date Settings V4.528</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -383,9 +383,16 @@
 							var date = new Date();
 							// key is epoch
 							date.setTime(key);
-							$a = $('<a target="_blank" href="https://my.ecwid.com/store/33883008#orders:count=100&shipping-from=" + date.toISOString().substring(0,10) + "%2000:00:00&shipping-to=" + date.toISOString().substring(0,10) + "%2023:59:00">Orders</a>');
+
+							$a = $('<a>',{
+								    target: '_blank',
+								    href: "https://my.ecwid.com/store/33883008#orders:count=100&shipping-from=" + date.toISOString().substring(0,10) + "%2000:00:00&shipping-to=" + date.toISOString().substring(0,10) + "%2023:59:00",
+								})
+							$button = $('<button>');
+							$button.addClass('btn btn-default');
+							$button.text("Orders");
 							
-							$tr.append($('<th>').append($a));
+							$tr.append($('<th>').append($a.append($button)));
 						});
 						$tr.appendTo('#sku-sold-table');
 						for(var h = 0 ; h <  list_of_name.length; h++){
