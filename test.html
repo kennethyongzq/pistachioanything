@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.515</h1>
+				<h1>Delivery Date Settings V4.516</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -296,7 +296,7 @@
 						krslog("Success: GET success (" + orders2.count + " / " + orders2.total + ")");		
 						orders_arr =[orders,orders2];
 
-						
+						console.log(orders_arr);
 					
 						for (var h = 0 ; h < orders_arr.length ; h++){
 							for (var i = 0 ; i < orders_arr[h].items.length ; i++){
