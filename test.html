@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.519</h1>
+				<h1>Delivery Date Settings V4.521</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -326,6 +326,20 @@
 										dict_of_epoch_to_pid[epoch][name]= 0	
 									}
 									dict_of_epoch_to_pid[epoch][name] +=  orders_arr[h].items[i].items[j].quantity 
+									if (typeof orders_arr[h].items[i].items[j].selectedOptions !== 'undefined'){
+										for(var k = 0 ; k < orders_arr[h].items[i].items[j].selectedOptions.length ; k++){
+											var selectedOptionName = orders_arr[h].items[i].items[j].selectedOptions[k]	
+											if (!(list_of_name.includes(selectedOptionName))){
+												list_of_name.push(selectedOptionName);
+											}	
+											if (!(selectedOptionName in dict_of_epoch_to_pid[epoch])){
+												dict_of_epoch_to_pid[epoch][selectedOptionName]= 0	
+											}
+											dict_of_epoch_to_pid[epoch][selectedOptionName] += 1
+											
+										}	
+									}
+									krslog("fuck");
 								}
 							}
 						}
@@ -451,6 +465,8 @@
 										dict[epoch][pid]= 0	
 									}
 									dict[epoch][pid] +=  orders_arr[h].items[i].items[j].quantity 
+									
+									    
 								}
 							}
 						}
