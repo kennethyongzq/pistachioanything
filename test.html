@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.514</h1>
+				<h1>Delivery Date Settings V4.515</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -373,11 +373,11 @@
 								krslog(key);
 								if (name in sorted_dict_of_epoch_to_pid[key]){
 									krslog("Creating td with value");
-									$tr.append($('<td>').text(sorted_dict_of_epoch_to_pid[key][name]));
+									$tr.append($('<td style="text-align: center;">').text(sorted_dict_of_epoch_to_pid[key][name]));
 								}
 								else{
 									krslog("Creating td 0");
-									$tr.append($('<td>').text(0));
+									$tr.append($('<td style="text-align: center;">').text(0));
 								}
 							
 							});
