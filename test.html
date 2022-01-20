@@ -46,7 +46,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V4.55</h1>
+				<h1>Delivery Date Settings V4.56</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -317,7 +317,7 @@
 								for(var j = 0 ; j <  orders_arr[h].items[i].items.length; j++){
 									var name =  orders_arr[h].items[i].items[j].name;
 									krslog(name);
-									if (!(name in list_of_name)){
+									if (!(list_of_name.includes(name)){
 										list_of_name.push(name);
 									}		
 									if (!(epoch in dict_of_epoch_to_pid)){
@@ -343,18 +343,24 @@
 						});
 						$tr.appendTo('#sku-sold-table');
 						for(var h = 0 ; h <  list_of_names.length; h++){
+
 							var name = list_of_names[h];
+							krslog(name);
 							var $tr = $('<tr>').append($('<th>').text(name));
 							Object.keys(dict_of_epoch_to_pid).forEach(function(key) {
+								krslog(key);
 								if (name in dict_of_epoch_to_pid[key]){
+									krslog("Creating td with value");
 									$tr.append($('<td>').text(dict_of_epoch_to_pid[key][name]));
 								}
 								else{
+									krslog("Creating td 0");
 									$tr.append($('<td>').text(0));
 								}
 							
 							});
 							$tr.appendTo('#sku-sold-table');
+							krslog("appendToSkuSoldTable");
 							
 						}
 						
