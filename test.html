@@ -51,7 +51,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V6.1</h1>
+				<h1>Delivery Date Settings V6.2</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -347,15 +347,11 @@
 									if (!(name in dict_of_epoch_to_pid[epoch])){
 										dict_of_epoch_to_pid[epoch][name] = 0	
 									}
-									
+									krslog(epoch);
+									krslog(name);
+									krslog(orders_arr[h].items[i].items[j].quantity);
 									dict_of_epoch_to_pid[epoch][name] +=  orders_arr[h].items[i].items[j].quantity;
-									if (name == "Sicilian Pistachio Cookies" && epoch == 0){
-										krslog("Adding Sicilian Pistachio Cookies at epoch 0");
-										krslog(orders_arr[h].items[i].items[j].quantity);
-										krslog("After Adding");
-										krslog(dict_of_epoch_to_pid[epoch][name]);
-										
-									}
+
 									if (typeof orders_arr[h].items[i].items[j].selectedOptions !== 'undefined'){
 										for(var k = 0 ; k < orders_arr[h].items[i].items[j].selectedOptions.length ; k++){
 
@@ -366,6 +362,9 @@
 											if (!(selectedOptionName in dict_of_epoch_to_pid[epoch])){
 												dict_of_epoch_to_pid[epoch][selectedOptionName] = 0	
 											}
+											krslog(epoch);
+											krslog(selectedOptionName);
+											krslog(1);
 											dict_of_epoch_to_pid[epoch][selectedOptionName] += 1
 
 										}	
