@@ -51,7 +51,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V6.2</h1>
+				<h1>Delivery Date Settings V6.3</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -315,20 +315,18 @@
 						for (var h = 0 ; h < orders_arr.length ; h++){
 							for (var i = 0 ; i < orders_arr[h].items.length ; i++){
 								krslog("Processing " + orders_arr[h].items[i].id);
-								var no_date = false;
+ 								var date = new Date();
+								date.setTime(0);
 								if (typeof orders_arr[h].items[i].extraFields !== 'undefined'){
 									if (typeof orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end !== 'undefined'){
-										var date = new Date( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
+										date = new Date( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
 									}
 								}
 								else if (typeof orders_arr[h].items[i].pickupTime !== 'undefined'){
-									var date = new Date( orders_arr[h].items[i].pickupTime);
+									date = new Date(orders_arr[h].items[i].pickupTime);
 								}
-								
 								else {
 									krslog("Order that is not delivery or self pickup, see console");	
-									var date = new Date();
-									date.setTime(0);
 									console.log(orders_arr[h].items[i]);
 									$("#no-date-p").text($("#no-date-p").text() + ', ' + orders_arr[h].items[i].id);
 									
