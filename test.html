@@ -51,7 +51,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V6.3</h1>
+				<h1>Delivery Date Settings V6.4</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -323,6 +323,7 @@
 									}
 								}
 								else if (typeof orders_arr[h].items[i].pickupTime !== 'undefined'){
+									krslog(orders_arr[h].items[i].pickupTime);
 									date = new Date(orders_arr[h].items[i].pickupTime);
 								}
 								else {
