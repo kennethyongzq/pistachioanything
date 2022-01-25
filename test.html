@@ -51,7 +51,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V5.5</h1>
+				<h1>Delivery Date Settings V5.6</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -320,15 +320,12 @@
 									if (typeof orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end !== 'undefined'){
 										var date = new Date( orders_arr[h].items[i].extraFields.ecwid_order_delivery_time_interval_end);
 									}
-									else{
-										no_date = true;
-									}
 								}
 								else if (typeof orders_arr[h].items[i].pickupTime !== 'undefined'){
 									var date = new Date( orders_arr[h].items[i].pickupTime);
 								}
 								
-								if(no_date){
+								else {
 									krslog("Order that is not delivery or self pickup, see console");	
 									var date = new Date();
 									date.setTime(0);
