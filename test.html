@@ -51,7 +51,7 @@
 		<div class="a-card__paddings">
 			<div class="form-area">
 				<!-- ######################################################################### -->
-				<h1>Delivery Date Settings V6.8</h1>
+				<h1>Delivery Date Settings V6.9</h1>
 				<!-- ######################################################################### -->
 				<h3>Change Delivery Date</h3>
 				<div class="form-area__content">
@@ -334,7 +334,7 @@
 								if(!got_date){
 									krslog("Order that is not delivery or self pickup, see console");	
 									console.log(orders_arr[h].items[i]);
-									$("#no-date-p").append($("<p>" + orders_arr[h].items[i].id + "</p>");
+									$("#no-date-p").append($("<p>" + orders_arr[h].items[i].id + "</p>"));
 								}
 								date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 00, 0, 0, 0);
 								var epoch = date.getTime();
